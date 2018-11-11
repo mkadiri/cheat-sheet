@@ -1,1 +1,1 @@
-WIKI https://github.com/mkadiri/cheat-sheet/wiki/Java
+# [WIKI](https://github.com/mkadiri/cheat-sheet/wiki/Java)
