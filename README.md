@@ -179,7 +179,7 @@
 </details>
 
 
-<!-- <details> -->
+<details>
   <summary>Docker</summary>
 
   ## Docker
@@ -199,6 +199,4 @@
   | `cat ~/[BACKUP_FILE].sql \| docker exec -i mysql /usr/bin/mysql -u root --password=root [DATABASE]` | restore database
   | `docker exec -i [CONTAINER] /var/www/site/vendor/bin/doctrine-module m:m` | run doctrine migrations on container
   | `docker exec -ti [CONTAINER] bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"` | update config file and restart apache
-
-
-<!-- </details> -->
+</details>
