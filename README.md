@@ -185,7 +185,7 @@
   ## Docker
   
   | Command                                                     | Description                     
-  |-                                                            |-
+  |:-                                                           |:-
   | docker image prune                                          | remove images                   
   | docker volume prune                                         | remove volume data              
   | docker network prune                                        | remove all networks                   
