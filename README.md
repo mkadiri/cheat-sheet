@@ -184,16 +184,18 @@
 
   ## Docker
   
-  | Command                                                       | Description                     
-  |:-                                                             |:-
-  | docker image prune                                            | remove images                   
-  | docker volume prune                                           | remove volume data              
-  | docker network prune                                          | remove all networks                   
-  | docker rmi $(docker images -f "dangling=true" -q) --force     | remove dangling images                
-  | docker rmi -f $(docker images -a -q)                          | prune all                             
-  | docker exec -ti --user build transaction bash                 | execute container with different user 
-  | docker cp container:/path/to.file ~/Downloads/                | copy file from container to your env
-  | docker cp ~/Downloads/to.file container:/path/to.file         | copy file from your env to a container
-  | docker exec -i mysql mysql <<< "CREATE DATABASE wallet_test;" | 
+  | Command                                                         | Description                     
+  |:-                                                               |:-
+  | `docker image prune`                                            | remove images                   
+  | `docker volume prune`                                           | remove volume data              
+  | `docker network prune`                                          | remove all networks
+  | `docker rmi $(docker images -f "dangling=true" -q) --force`     | remove dangling images                
+  | `docker rmi -f $(docker images -a -q)`                          | prune all
+  | `docker exec -ti --user build transaction bash`                 | execute container with different user 
+  | `docker cp container:/path/to.file ~/Downloads/`                | copy file from container to your env
+  | `docker cp ~/Downloads/to.file container:/path/to.file`         | copy file from your env to a container
+  | `docker exec -i mysql mysql <<< "CREATE DATABASE test;"`        | run query on mysql container
+  | `docker exec mysql /usr/bin/mysqldump -u root --password=root [DATABASE] > ~/[BACKUP_FILE].sql` | backup database
+  
 
 <!-- </details> -->
