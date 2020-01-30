@@ -183,6 +183,8 @@
   <summary>Docker</summary>
 
   ## Docker
+
+  ### General commands
   
   | Command                                                         | Description                     
   |:-                                                               |:-
@@ -194,9 +196,19 @@
   | `docker exec -ti --user build transaction bash`                 | execute container with different user 
   | `docker cp container:/path/to.file ~/Downloads/`                | copy file from container to your env
   | `docker cp ~/Downloads/to.file container:/path/to.file`         | copy file from your env to a container
+  
+  ### Database commands
+
+  | Command                                                         | Description
+  |:-                                                               |:-
   | `docker exec -i mysql mysql <<< "CREATE DATABASE test;"`        | run query on mysql container
   | `docker exec mysql /usr/bin/mysqldump -u root --password=root [DATABASE] > ~/[BACKUP_FILE].sql` | backup database
   | `cat ~/[BACKUP_FILE].sql \| docker exec -i mysql /usr/bin/mysql -u root --password=root [DATABASE]` | restore database
+  
+  ### Other commands
+  
+  | Command                                                         | Description
+  |:-                                                               |:-
   | `docker exec -i [CONTAINER] /var/www/site/vendor/bin/doctrine-module m:m` | run doctrine migrations on container
   | `docker exec -ti [CONTAINER] bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"` | update config file and restart apache
 </details>
