@@ -184,75 +184,95 @@
 
   ## Docker
 
-  ### Commands
-
   ``` 
   # remove images
   docker image prune
   
   # remove volume data
-  docker volume prune`                                           |               
-  | `docker network prune`                                          | remove all networks
-  | `docker rmi $(docker images -f "dangling=true" -q) --force`     | remove dangling images                
-  | `docker rmi -f $(docker images -a -q)`                          | prune all
-  | `docker exec -ti --user build transaction bash`                 | execute container with different user 
-  | `docker cp container:/path/to.file ~/Downloads/`                | copy file from container to your env
-  | `docker cp ~/Downloads/to.file container:/path/to.file`         | copy file from your env to a container
-  
+  docker volume prune          
 
-  | Command                                                         | Description
-  |:-                                                               |:-
-  | `docker exec -i mysql mysql <<< "CREATE DATABASE test;"`        | run query on mysql container
-  | `docker exec mysql /usr/bin/mysqldump -u root --password=root [DATABASE] > ~/[BACKUP_FILE].sql` | backup database
-  | `cat ~/[BACKUP_FILE].sql \| docker exec -i mysql /usr/bin/mysql -u root --password=root [DATABASE]` | restore database
-  | `docker exec -i [CONTAINER] /var/www/site/vendor/bin/doctrine-module m:m` | run doctrine migrations on container
-  | `docker exec -ti [CONTAINER] bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"` | update config file and restart apache
+  # remove all networks
+  docker network prune
+
+  # remove dangling images
+  docker rmi $(docker images -f "dangling=true" -q) --force                 
+  
+  # prune all
+  docker rmi -f $(docker images -a -q)
+  
+  # execute container with different user 
+  docker exec -ti --user build transaction bash
+  
+  # copy file from container to your env
+  docker cp container:/path/to.file ~/Downloads/
+  
+  # copy file from your env to a container
+  docker cp ~/Downloads/to.file container:/path/to.file
+  
+  # run query on mysql container
+  docker exec -i mysql mysql <<< "CREATE DATABASE test;" 
+  
+  # backup database
+  docker exec mysql /usr/bin/mysqldump -u root --password=root [DATABASE] > ~/[BACKUP_FILE].sql
+
+  # restore database
+  cat ~/[BACKUP_FILE].sql \| docker exec -i mysql /usr/bin/mysql -u root --password=root [DATABASE]
+  
+  # run doctrine migrations on container
+  docker exec -i [CONTAINER] /var/www/site/vendor/bin/doctrine-module m:m
+  
+  # update config file and restart apache
+  docker exec -ti [CONTAINER] bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"
+  ```
 </details>
 
-<!-- <details> -->
+<details>
   <summary>Kubernetes</summary>
 
   ## Kubernetes
 
+</details>
 
-<!-- </details> -->
-
+<details>
+  <summary>Kubectl</summary>
+  
   ## Kubectl
 
   ```
-# exec on to container on namespace
-kubectl exec -ti --namespace=mkadiri mysql-0 bash
+  # exec on to container on namespace
+  kubectl exec -ti --namespace=mkadiri mysql-0 bash
 
-# exec mysql command on container
-kubectl exec --namespace=mkadiri -ti mysql-0 mysql <<< "show tables;"
+  # exec mysql command on container
+  kubectl exec --namespace=mkadiri -ti mysql-0 mysql <<< "show tables;"
 
-# run commands on container
-kubectl exec --namespace=mkadiri -ti $MKADIRI_MASTER_CONTAINER -- bash -c "echo 'hello world'"
+  # run commands on container
+  kubectl exec --namespace=mkadiri -ti $MKADIRI_MASTER_CONTAINER -- bash -c "echo 'hello world'"
 
-# backup database on mysql container
-kubectl exec --namespace=mkadiri -ti mysql-0 -- bash -c "mysql -u root --password=root my-db < ~/my-db.sql" 
+  # backup database on mysql container
+  kubectl exec --namespace=mkadiri -ti mysql-0 -- bash -c "mysql -u root --password=root my-db < ~/my-db.sql" 
 
-# list clusters
-kubectl config get-contexts
+  # list clusters
+  kubectl config get-contexts
 
-# list pods on a namespace
-kubectl get pods --context="aws1-test" --namespace="mkadiri"
+  # list pods on a namespace
+  kubectl get pods --context="aws1-test" --namespace="mkadiri"
 
-# view all of the containers in this pod.
-kubectl describe pod/quidco-web-app-84dbf4f4f9-rc4c5 -n mkadiri
+  # view all of the containers in this pod.
+  kubectl describe pod/quidco-web-app-84dbf4f4f9-rc4c5 -n mkadiri
 
-# view logs of a container
-kubectl --namespace=staging logs -f search-6db7577d85-hd4mx
+  # view logs of a container
+  kubectl --namespace=staging logs -f search-6db7577d85-hd4mx
 
-# log output from specific container
-kubectl --namespace=mkadiri --container=quidco-web logs -f quidco-web-app-d9bf5dcfd-j88x2
+  # log output from specific container
+  kubectl --namespace=mkadiri --container=quidco-web logs -f quidco-web-app-d9bf5dcfd-j88x2
 
-# exec from specific container
-kubectl --namespace=mkadiri --container=quidco-web exec -ti  quidco-web-app-d9bf5dcfd-j88x2 bash
+  # exec from specific container
+  kubectl --namespace=mkadiri --container=quidco-web exec -ti  quidco-web-app-d9bf5dcfd-j88x2 bash
 
-# Flush redis cache
-kubectl exec --namespace=mkadiri -ti redis-0 redis-cli FLUSHALL
+  # Flush redis cache
+  kubectl exec --namespace=mkadiri -ti redis-0 redis-cli FLUSHALL
 
-# delete pods that have the `CrashLoopBackOff` status
-kubectl --namespace=mkadiri delete pod `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+  # delete pods that have the `CrashLoopBackOff` status
+  kubectl --namespace=mkadiri delete pod `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
   ```
+
