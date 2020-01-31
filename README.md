@@ -255,24 +255,25 @@
   kubectl config get-contexts
 
   # list pods on a namespace
-  kubectl get pods --context="aws1-test" --namespace="mkadiri"
+  kubectl get pods --context="aws1-test" --namespace="dev"
 
   # view all of the containers in this pod.
   kubectl describe pod/quidco-web-app-84dbf4f4f9-rc4c5 -n mkadiri
 
-  # view logs of a container
-  kubectl --namespace=staging logs -f search-6db7577d85-hd4mx
+  # view logs of a pod
+  kubectl logs -f --namespace=dev POD
 
   # log output from specific container
-  kubectl --namespace=mkadiri --container=quidco-web logs -f quidco-web-app-d9bf5dcfd-j88x2
+  kubectl logs -f --namespace=dev --container=CONTAINER POD
 
   # exec from specific container
-  kubectl --namespace=mkadiri --container=quidco-web exec -ti  quidco-web-app-d9bf5dcfd-j88x2 bash
+  kubectl exec -ti --namespace=mkadiri --container=quidco-web POD bash
 
   # Flush redis cache
-  kubectl exec --namespace=mkadiri -ti redis-0 redis-cli FLUSHALL
+  kubectl exec -ti --namespace=mkadiri redis-0 redis-cli FLUSHALL
 
   # delete pods that have the `CrashLoopBackOff` status
-  kubectl --namespace=mkadiri delete pod `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+  kubectl delete pod --namespace="qco-9076" \
+    `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
   ```
 
