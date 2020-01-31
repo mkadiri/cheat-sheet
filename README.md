@@ -186,10 +186,12 @@
 
   ### Commands
 
-  | Command                                                         | Description                     
-  |:-                                                               |:-
-  | `docker image prune`                                            | remove images                   
-  | `docker volume prune`                                           | remove volume data              
+  ``` 
+  # remove images
+  docker image prune
+  
+  # remove volume data
+  docker volume prune`                                           |               
   | `docker network prune`                                          | remove all networks
   | `docker rmi $(docker images -f "dangling=true" -q) --force`     | remove dangling images                
   | `docker rmi -f $(docker images -a -q)`                          | prune all
@@ -206,3 +208,51 @@
   | `docker exec -i [CONTAINER] /var/www/site/vendor/bin/doctrine-module m:m` | run doctrine migrations on container
   | `docker exec -ti [CONTAINER] bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"` | update config file and restart apache
 </details>
+
+<!-- <details> -->
+  <summary>Kubernetes</summary>
+
+  ## Kubernetes
+
+
+<!-- </details> -->
+
+  ## Kubectl
+
+  ```
+# exec on to container on namespace
+kubectl exec -ti --namespace=mkadiri mysql-0 bash
+
+# exec mysql command on container
+kubectl exec --namespace=mkadiri -ti mysql-0 mysql <<< "show tables;"
+
+# run commands on container
+kubectl exec --namespace=mkadiri -ti $MKADIRI_MASTER_CONTAINER -- bash -c "echo 'hello world'"
+
+# backup database on mysql container
+kubectl exec --namespace=mkadiri -ti mysql-0 -- bash -c "mysql -u root --password=root my-db < ~/my-db.sql" 
+
+# list clusters
+kubectl config get-contexts
+
+# list pods on a namespace
+kubectl get pods --context="aws1-test" --namespace="mkadiri"
+
+# view all of the containers in this pod.
+kubectl describe pod/quidco-web-app-84dbf4f4f9-rc4c5 -n mkadiri
+
+# view logs of a container
+kubectl --namespace=staging logs -f search-6db7577d85-hd4mx
+
+# log output from specific container
+kubectl --namespace=mkadiri --container=quidco-web logs -f quidco-web-app-d9bf5dcfd-j88x2
+
+# exec from specific container
+kubectl --namespace=mkadiri --container=quidco-web exec -ti  quidco-web-app-d9bf5dcfd-j88x2 bash
+
+# Flush redis cache
+kubectl exec --namespace=mkadiri -ti redis-0 redis-cli FLUSHALL
+
+# delete pods that have the `CrashLoopBackOff` status
+kubectl --namespace=mkadiri delete pod `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+  ```
