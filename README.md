@@ -201,28 +201,28 @@
   docker rmi -f $(docker images -a -q)
   
   # execute container with different user 
-  docker exec -ti --user build transaction bash
+  docker exec -ti --user ${USER} ${CONTAINER} bash
   
   # copy file from container to your env
-  docker cp container:/path/to.file ~/Downloads/
+  docker cp ${CONTAINER}:/${FILE_PATH} ${OUTPUT_PATH}
   
   # copy file from your env to a container
-  docker cp ~/Downloads/to.file container:/path/to.file
+  docker cp ${OUTPUT_PATH} ${CONTAINER}:${FILE_PATH}
   
   # run query on mysql container
-  docker exec -i mysql mysql <<< "CREATE DATABASE test;" 
+  docker exec -i ${CONTAINER} mysql <<< "CREATE DATABASE test;" 
   
   # backup database
-  docker exec mysql /usr/bin/mysqldump -u root --password=root [DATABASE] > ~/[BACKUP_FILE].sql
+  docker exec ${CONTAINER} /usr/bin/mysqldump -u root --password=root ${DATABASE} > ${OUTPUT_PATH}
 
   # restore database
-  cat ~/[BACKUP_FILE].sql \| docker exec -i mysql /usr/bin/mysql -u root --password=root [DATABASE]
+  cat ${FILE_PATH} | docker exec -i ${CONTAINER} /usr/bin/mysql -u root --password=root ${DATABASE}
   
   # run doctrine migrations on container
-  docker exec -i [CONTAINER] /var/www/site/vendor/bin/doctrine-module m:m
+  docker exec -i ${CONTAINER} /var/www/site/vendor/bin/doctrine-module m:m
   
   # update config file and restart apache
-  docker exec -ti [CONTAINER] bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"
+  docker exec -ti ${CONTAINER} bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"
   ```
 </details>
 
@@ -255,7 +255,7 @@
   kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
 
   # Flush redis cache
-  kubectl exec -ti --namespace=${NAMESPACE} redis-0 redis-cli FLUSHALL
+  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} redis-cli FLUSHALL
 
   # list clusters
   kubectl config get-contexts
@@ -275,4 +275,4 @@
   # delete pods that have the `CrashLoopBackOff` status
   kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
   ```
-
+</details>
