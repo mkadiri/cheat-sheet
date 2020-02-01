@@ -249,22 +249,7 @@
   kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} -- bash -c "echo 'hello world'"
 
   # backup database on mysql container
-  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} -- bash -c "mysql -u root --password=root my-db < ~/my-db.sql" 
-
-  # list clusters
-  kubectl config get-contexts
-
-  # list pods on a namespace
-  kubectl get pods --context=${CONTEXT} --namespace=${NAMESPACE}
-
-  # view all of the containers in this pod.
-  kubectl describe pod/quidco-web-app-84dbf4f4f9-rc4c5 --namespace=${NAMESPACE}
-
-  # view logs of a pod
-  kubectl logs -f --namespace=${NAMESPACE} ${POD}
-
-  # log output from specific container
-  kubectl logs -f --namespace=${NAMESPACE} --container=${CONTAINER} ${POD}
+  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
 
   # exec from specific container
   kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
@@ -272,8 +257,22 @@
   # Flush redis cache
   kubectl exec -ti --namespace=${NAMESPACE} redis-0 redis-cli FLUSHALL
 
+  # list clusters
+  kubectl config get-contexts
+
+  # list pods on a namespace
+  kubectl get pods --context=${CONTEXT} --namespace=${NAMESPACE}
+
+  # view all of the containers in a pod.
+  kubectl describe pod/${POD} --namespace=${NAMESPACE}
+
+  # view logs of a pod
+  kubectl logs -f --namespace=${NAMESPACE} ${POD}
+
+  # log output from specific container
+  kubectl logs -f --namespace=${NAMESPACE} --container=${CONTAINER} ${POD}
+
   # delete pods that have the `CrashLoopBackOff` status
-  kubectl delete pod --namespace="dev" \
-    `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+  kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
   ```
 
