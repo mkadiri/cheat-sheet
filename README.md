@@ -278,6 +278,7 @@
   # example env variables
   export NAMESPACE=dev
   export POD=web-app
+  export CONTAINER=web-app-1
 
   ```
 </details>
