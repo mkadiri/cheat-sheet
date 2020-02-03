@@ -274,5 +274,10 @@
 
   # delete pods that have the `CrashLoopBackOff` status
   kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+
+  # example env variables
+  export NAMESPACE=dev
+  export POD=web-app
+
   ```
 </details>
