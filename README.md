@@ -168,13 +168,36 @@
 
   ## Bash
 
-  ### Nano
+  ```
+  # Nano
 
-  | Command                 | Description                           |
-  |-------------------------|---------------------------------------|
-  | nano -l /path/to.file   | Open a file with line numbers         |
-  | ctrl + _                | Jump to a line number                 |
-  | ctrl + k                | Remove a line (go to the line first)  |
+  # Open a file with line numbers
+  nano -l /path/to.file
+  
+  # Jump to a line number 
+  ctrl + _               
+
+  # Remove a line (go to the line first)
+  ctrl + k                
+  ```
+  
+  ```
+  # empty and write to a file
+  echo "hello world" > hello.txt
+
+  # add on to a file
+  echo "hello world" >> hello.txt
+
+  # give file exec priv
+  chmod +x temp.sh
+
+  # logout user
+  sudo pkill -KILL -u ${USERNAME}
+
+  # login as another user
+  su '${USERNAME}'
+
+  ```
   
 </details>
 
