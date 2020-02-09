@@ -305,3 +305,65 @@
 
   ```
 </details>
+
+<details>
+  <summary>Minikube</summary>
+
+  ## Minikube
+
+  ### What is Minikube?
+  - A tool that allows you to run kubernetes locally
+  - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine
+
+  ### Install
+
+  ```
+  # VirtualBox
+  sudo add-apt-repository multiverse && sudo apt-get update
+
+  # Minikube
+  # https://kubernetes.io/docs/tasks/tools/install-minikube/#before-you-begin
+  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+    && chmod +x minikube
+
+  sudo install minikube /usr/local/bin
+  ```
+
+  Note: make sure you have virtualization enabled on you machine, this needs to be
+  enabled from the bios
+</details>
+
+<details>
+  <summary>Finance</summary>
+
+  ## Finance
+
+  ```
+  AMC = Annual management charge
+  The cost of managing funds/investments
+
+  ISA = Individual savings account
+  - UK equivelant of an IRA
+  - Money made from investments in an ISA are tax-free
+  - Allows you to deposit £20k a year (as of 2020)
+
+  LISA = Lifetime Individual savings account
+  - Similar to an ISA
+  - Can only be accessed at retirement or for buying a first home
+  - Allows you to deposit £4k a year
+  - You receive a 25% bonus (up to £1k) from the government every year
+  - Available to 18-39 year olds
+
+  Shorting a stock
+  - This is when you bet that the price of a stock will go down
+  - How it works
+    - You borrow a stock (fees normally apply)
+    - Immediately sell the stock
+    - Wait for the value to go down and buy it back
+    - Return the shares and pocket the difference
+    - e.g. 
+      day 1 buy 10 shares for 10k with each share worth £1k
+      day 2 share price drops to £800, buy back 10 shares.
+      return those 10 shares that you bought back for £8k and keep £2k
+  ```
+</details>
