@@ -343,7 +343,7 @@
   The cost of managing funds/investments
 
   ISA = Individual savings account
-  - UK equivelant of an IRA
+  - UK equivalant of an IRA
   - Money made from investments in an ISA are tax-free
   - Allows you to deposit £20k a year (as of 2020)
 
