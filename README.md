@@ -198,6 +198,18 @@
   su '${USERNAME}'
 
   ```
+
+  ```
+  # direnv
+  # https://direnv.net/
+  # direnv is an extension for your shell. 
+  # It augments existing shells with a new feature that can load and unload environment variables depending on the current directory.
+
+  # install 
+  brew install direnv
+  eval "$(direnv hook bash)"
+
+  ```
   
 </details>
 
@@ -249,89 +261,7 @@
   ```
 </details>
 
-<details>
-  <summary>Kubernetes</summary>
 
-  ## Kubernetes
-
-</details>
-
-<details>
-  <summary>Kubectl</summary>
-  
-  ## Kubectl
-
-  ```
-  # exec on to pod on namespace
-  kubectl exec -ti --namespace=${NAMESPACE} ${POD} bash
-
-  # exec mysql command on pod
-  kubectl exec -ti --namespace=${NAMESPACE} ${POD} mysql <<< "show tables;"
-
-  # run commands on pod
-  kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "echo 'hello world'"
-
-  # backup database on mysql container
-  kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
-
-  # exec from specific container
-  kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
-
-  # Flush redis cache
-  kubectl exec -ti --namespace=${NAMESPACE} ${POD} redis-cli FLUSHALL
-
-  # list clusters
-  kubectl config get-contexts
-
-  # list pods on a namespace
-  kubectl get pods --context=${CONTEXT} --namespace=${NAMESPACE}
-
-  # view all of the containers in a pod.
-  kubectl describe pod/${POD} --namespace=${NAMESPACE}
-
-  # view logs of a pod
-  kubectl logs -f --namespace=${NAMESPACE} ${POD}
-
-  # log output from specific container
-  kubectl logs -f --namespace=${NAMESPACE} --container=${CONTAINER} ${POD}
-
-  # delete pods that have the `CrashLoopBackOff` status
-  kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
-
-  # example env variables
-  export NAMESPACE=dev
-  export POD=web-app
-  export CONTAINER=web-app-1
-
-  ```
-</details>
-
-<details>
-  <summary>Minikube</summary>
-
-  ## Minikube
-
-  ### What is Minikube?
-  - A tool that allows you to run kubernetes locally
-  - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine
-
-  ### Install
-
-  ```
-  # VirtualBox
-  sudo add-apt-repository multiverse && sudo apt-get update
-
-  # Minikube
-  # https://kubernetes.io/docs/tasks/tools/install-minikube/#before-you-begin
-  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-    && chmod +x minikube
-
-  sudo install minikube /usr/local/bin
-  ```
-
-  Note: make sure you have virtualization enabled on you machine, this needs to be
-  enabled from the bios
-</details>
 
 <details>
   <summary>Finance</summary>
@@ -367,3 +297,91 @@
       return those 10 shares that you bought back for £8k and keep £2k
   ```
 </details>
+
+
+<details>
+  <summary>DevOps</summary>
+
+  <details>
+    <summary>Kubernetes</summary>
+    ## Kubernetes
+  </details>
+
+  <details>
+    <summary>Kubectl</summary>
+    
+    ## Kubectl
+
+    ```
+    # exec on to pod on namespace
+    kubectl exec -ti --namespace=${NAMESPACE} ${POD} bash
+
+    # exec mysql command on pod
+    kubectl exec -ti --namespace=${NAMESPACE} ${POD} mysql <<< "show tables;"
+
+    # run commands on pod
+    kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "echo 'hello world'"
+
+    # backup database on mysql container
+    kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
+
+    # exec from specific container
+    kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
+
+    # Flush redis cache
+    kubectl exec -ti --namespace=${NAMESPACE} ${POD} redis-cli FLUSHALL
+
+    # list clusters
+    kubectl config get-contexts
+
+    # list pods on a namespace
+    kubectl get pods --context=${CONTEXT} --namespace=${NAMESPACE}
+
+    # view all of the containers in a pod.
+    kubectl describe pod/${POD} --namespace=${NAMESPACE}
+
+    # view logs of a pod
+    kubectl logs -f --namespace=${NAMESPACE} ${POD}
+
+    # log output from specific container
+    kubectl logs -f --namespace=${NAMESPACE} --container=${CONTAINER} ${POD}
+
+    # delete pods that have the `CrashLoopBackOff` status
+    kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+
+    # example env variables
+    export NAMESPACE=dev
+    export POD=web-app
+    export CONTAINER=web-app-1
+
+    ```
+  </details>
+
+  <details>
+    <summary>Minikube</summary>
+
+    ## Minikube
+
+    ### What is Minikube?
+    - A tool that allows you to run kubernetes locally
+    - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine
+
+    ### Install
+
+    ```
+    # VirtualBox
+    sudo add-apt-repository multiverse && sudo apt-get update
+
+    # Minikube
+    # https://kubernetes.io/docs/tasks/tools/install-minikube/#before-you-begin
+    curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+      && chmod +x minikube
+
+    sudo install minikube /usr/local/bin
+    ```
+
+    Note: make sure you have virtualization enabled on you machine, this needs to be
+    enabled from the bios
+  </details>
+</details>
+
