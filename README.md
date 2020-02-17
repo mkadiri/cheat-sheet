@@ -262,23 +262,23 @@
   ## Kubectl
 
   ```
-  # exec on to container on namespace
-  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} bash
+  # exec on to pod on namespace
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} bash
 
-  # exec mysql command on container
-  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} mysql <<< "show tables;"
+  # exec mysql command on pod
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} mysql <<< "show tables;"
 
-  # run commands on container
-  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} -- bash -c "echo 'hello world'"
+  # run commands on pod
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "echo 'hello world'"
 
   # backup database on mysql container
-  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
 
   # exec from specific container
   kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
 
   # Flush redis cache
-  kubectl exec -ti --namespace=${NAMESPACE} ${CONTAINER} redis-cli FLUSHALL
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} redis-cli FLUSHALL
 
   # list clusters
   kubectl config get-contexts
