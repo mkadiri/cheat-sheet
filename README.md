@@ -215,6 +215,44 @@
 
 
 <details>
+  <summary>Finance</summary>
+
+  ## Finance
+
+  ```
+  AMC = Annual management charge
+  The cost of managing funds/investments
+
+  ISA = Individual savings account
+  - UK equivalant of an IRA
+  - Money made from investments in an ISA are tax-free
+  - Allows you to deposit £20k a year (as of 2020)
+
+  LISA = Lifetime Individual savings account
+  - Similar to an ISA
+  - Can only be accessed at retirement or for buying a first home
+  - Allows you to deposit £4k a year
+  - You receive a 25% bonus (up to £1k) from the government every year
+  - Available to 18-39 year olds
+
+  Shorting a stock
+  - This is when you bet that the price of a stock will go down
+  - How it works
+    - You borrow a stock (fees normally apply)
+    - Immediately sell the stock
+    - Wait for the value to go down and buy it back
+    - Return the shares and pocket the difference
+    - e.g. 
+      day 1 buy 10 shares for 10k with each share worth £1k
+      day 2 share price drops to £800, buy back 10 shares.
+      return those 10 shares that you bought back for £8k and keep £2k
+  ```
+</details>
+
+### DevOps
+
+
+<details>
   <summary>Docker</summary>
 
   ## Docker
@@ -261,127 +299,91 @@
   ```
 </details>
 
+<details>
+  <summary>Kubernetes</summary>
 
+  ## Kubernetes
+
+</details>
 
 <details>
-  <summary>Finance</summary>
-
-  ## Finance
+  <summary>Kubectl</summary>
+  
+  ## Kubectl
 
   ```
-  AMC = Annual management charge
-  The cost of managing funds/investments
+  # exec on to pod on namespace
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} bash
 
-  ISA = Individual savings account
-  - UK equivalant of an IRA
-  - Money made from investments in an ISA are tax-free
-  - Allows you to deposit £20k a year (as of 2020)
+  # exec mysql command on pod
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} mysql <<< "show tables;"
 
-  LISA = Lifetime Individual savings account
-  - Similar to an ISA
-  - Can only be accessed at retirement or for buying a first home
-  - Allows you to deposit £4k a year
-  - You receive a 25% bonus (up to £1k) from the government every year
-  - Available to 18-39 year olds
+  # run commands on pod
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "echo 'hello world'"
 
-  Shorting a stock
-  - This is when you bet that the price of a stock will go down
-  - How it works
-    - You borrow a stock (fees normally apply)
-    - Immediately sell the stock
-    - Wait for the value to go down and buy it back
-    - Return the shares and pocket the difference
-    - e.g. 
-      day 1 buy 10 shares for 10k with each share worth £1k
-      day 2 share price drops to £800, buy back 10 shares.
-      return those 10 shares that you bought back for £8k and keep £2k
+  # backup database on mysql container
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
+
+  # exec from specific container
+  kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
+
+  # Flush redis cache
+  kubectl exec -ti --namespace=${NAMESPACE} ${POD} redis-cli FLUSHALL
+
+  # list clusters
+  kubectl config get-contexts
+
+  # list pods on a namespace
+  kubectl get pods --context=${CONTEXT} --namespace=${NAMESPACE}
+
+  # view all of the containers in a pod.
+  kubectl describe pod/${POD} --namespace=${NAMESPACE}
+
+  # view logs of a pod
+  kubectl logs -f --namespace=${NAMESPACE} ${POD}
+
+  # log output from specific container
+  kubectl logs -f --namespace=${NAMESPACE} --container=${CONTAINER} ${POD}
+
+  # delete pods that have the `CrashLoopBackOff` status
+  kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+
+  # example env variables
+  export NAMESPACE=dev
+  export POD=web-app
+  export CONTAINER=web-app-1
+
   ```
 </details>
 
-
 <details>
-  <summary>DevOps</summary>
+  <summary>Minikube</summary>
 
-  <details>
-    <summary>Kubernetes</summary>
-    ## Kubernetes
-  </details>
+  ## Minikube
 
-  <details>
-    <summary>Kubectl</summary>
-    
-    ## Kubectl
+  ### What is Minikube?
+  - A tool that allows you to run kubernetes locally
+  - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine
 
-    ```
-    # exec on to pod on namespace
-    kubectl exec -ti --namespace=${NAMESPACE} ${POD} bash
+  ### Install
 
-    # exec mysql command on pod
-    kubectl exec -ti --namespace=${NAMESPACE} ${POD} mysql <<< "show tables;"
+  ```
+  # VirtualBox
+  sudo add-apt-repository multiverse && sudo apt-get update
 
-    # run commands on pod
-    kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "echo 'hello world'"
+  # Minikube
+  # https://kubernetes.io/docs/tasks/tools/install-minikube/#before-you-begin
+  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+    && chmod +x minikube
 
-    # backup database on mysql container
-    kubectl exec -ti --namespace=${NAMESPACE} ${POD} -- bash -c "mysql -u root --password=root ${DATABASE} < ~/${DATABASE}.sql" 
+  sudo install minikube /usr/local/bin
+  ```
 
-    # exec from specific container
-    kubectl exec -ti --namespace=${NAMESPACE} --container=${CONTAINER} ${POD} bash
-
-    # Flush redis cache
-    kubectl exec -ti --namespace=${NAMESPACE} ${POD} redis-cli FLUSHALL
-
-    # list clusters
-    kubectl config get-contexts
-
-    # list pods on a namespace
-    kubectl get pods --context=${CONTEXT} --namespace=${NAMESPACE}
-
-    # view all of the containers in a pod.
-    kubectl describe pod/${POD} --namespace=${NAMESPACE}
-
-    # view logs of a pod
-    kubectl logs -f --namespace=${NAMESPACE} ${POD}
-
-    # log output from specific container
-    kubectl logs -f --namespace=${NAMESPACE} --container=${CONTAINER} ${POD}
-
-    # delete pods that have the `CrashLoopBackOff` status
-    kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
-
-    # example env variables
-    export NAMESPACE=dev
-    export POD=web-app
-    export CONTAINER=web-app-1
-
-    ```
-  </details>
-
-  <details>
-    <summary>Minikube</summary>
-
-    ## Minikube
-
-    ### What is Minikube?
-    - A tool that allows you to run kubernetes locally
-    - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine
-
-    ### Install
-
-    ```
-    # VirtualBox
-    sudo add-apt-repository multiverse && sudo apt-get update
-
-    # Minikube
-    # https://kubernetes.io/docs/tasks/tools/install-minikube/#before-you-begin
-    curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-      && chmod +x minikube
-
-    sudo install minikube /usr/local/bin
-    ```
-
-    Note: make sure you have virtualization enabled on you machine, this needs to be
-    enabled from the bios
-  </details>
+  Note: make sure you have virtualization enabled on you machine, this needs to be
+  enabled from the bios
 </details>
+
+
+
+
 
