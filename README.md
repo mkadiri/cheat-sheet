@@ -164,6 +164,20 @@
 
 
 <details>
+  <summary>Git</summary>
+
+  ```
+  # create and push tag
+  git tag v3.0.0
+  git push --tags
+  
+  # fatal: refusing to merge unrelated histories 
+  git pull origin master --allow-unrelated-histories
+  
+  ```
+</details>
+
+<details>
   <summary>Bash</summary>
 
   ## Bash
@@ -383,7 +397,26 @@
   enabled from the bios
 </details>
 
+### Programming
 
+<details>
+  <summary>PHP</summary>
 
+  ```
 
+  ```
 
+  ### Composer
+  ```
+  # update single package
+  composer update doctrine/doctrine-fixtures-bundle
+
+  # run composer with more memory
+  php -d memory_limit=-1 /usr/local/bin/composer install
+
+  # require a specific branch of a library, prepend with `dev-`
+  composer require google/apiclient:dev-feature-123 
+
+  ```
+
+</details>
