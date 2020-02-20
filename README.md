@@ -1,6 +1,6 @@
 # Cheat sheet wiki
 
-[my directory](blob/master/docs/elasticsearch-7.md)
+[my directory](docs/elasticsearch-7.md)
 
 
 <details>
