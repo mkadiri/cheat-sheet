@@ -1,6 +1,6 @@
 # Cheat sheet wiki
 
-[my directory](docs/elasticseach-7.md)
+[my directory](../docs/elasticseach-7.md)
 
 
 <details>
