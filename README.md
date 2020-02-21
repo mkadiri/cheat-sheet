@@ -529,6 +529,13 @@
   chmod +x app && \
   ./app
   ```
+
+  ```
+  # create template
+  pip install cookiecutter
+
+  cookiecutter https://github.com/lacion/cookiecutter-golang.git
+  ```
 </details>
 
 <details>
@@ -543,6 +550,11 @@
   ```
   # install
   sudo apt install python-pip
+
+  nano ~/.bashrc
+  
+  # add the following to the end 
+  PATH=$PATH:~/.local/bin
   ```
 
 </details>
