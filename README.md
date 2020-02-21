@@ -178,7 +178,7 @@
 <details>
   <summary>Bash</summary>
 
-  ## Bash
+  ### Bash
 
   ```
   # Nano
@@ -209,6 +209,15 @@
   # login as another user
   su '${USERNAME}'
 
+  # find files with php file ext
+  find . -name *.php
+
+  # check currently logged in user
+  whoami
+
+  # create symbolic link, creates link to bin (application) folder
+  ln -s ~/.git/kubenv /usr/local/bin/kubenv
+
   ```
 
   ```
@@ -229,7 +238,7 @@
 <details>
   <summary>Finance</summary>
 
-  ## Finance
+  ### Finance
 
   ```
   AMC = Annual management charge
