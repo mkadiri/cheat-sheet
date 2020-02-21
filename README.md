@@ -192,6 +192,13 @@
   # Remove a line (go to the line first)
   ctrl + k                
   ```
+
+  ```
+  # awk
+
+  # if 3rd column has the value "mkadiri", print out "yes"
+  ls -l | awk '$3 == "mkadiri" {print "yes"}'
+  ```
   
   ```
   # empty and write to a file
@@ -367,6 +374,9 @@
 
   # delete pods that have the `CrashLoopBackOff` status
   kubectl delete pod --namespace=${NAMESPACE} `kubectl get pods | awk '$3 == "CrashLoopBackOff" {print $1}'`
+
+  # get pods on namespace
+  kubectl get pods --namespace=${NAMESPACE}
 
   # example env variables
   export NAMESPACE=dev
