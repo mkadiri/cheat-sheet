@@ -238,6 +238,21 @@
   git fetch origin && \
   git reset --hard origin/develop && \
   git pull --rebase
+
+  # branch has diverged error
+  git checkout develop
+  git branch ${branch} -D
+  git checkout ${branch}
+
+  # view config
+  git config --list
+
+  # find git config location
+  git config --list --show-origin
+
+  # setup keys
+  ssh-keygen -t ed25519 -C "<comment>"
+  ssh-add -K ~/.ssh/id_rsa
   ```
 </details>
 
@@ -396,11 +411,20 @@
   <summary>Kubernetes</summary>
 
   ### Kubernetes
-  - an image orchestration tool
+  an image orchestration tool
+
+  #### AWS EKS
+  - Elastic Kubernetes Service 
+
+  #### AWS Fargate
+  - serverless compute engine for containers
+  - allocates the right amount of compute 
+  - eliminates need to scale or choose instances
+  - https://aws.amazon.com/fargate/
 
   #### Cluster
   - a collection of computers connected to work as a single unit
-  - nodes
+  - contains nodes
     - is a physical or virtual machine
     - master (one in a cluster)
       - co-ordinates cluster
@@ -411,8 +435,35 @@
 
   #### Pod
   - smallest unit of deployment
+  - sits in a worker node
   - has one or more containers
   - needs to specify container images
+
+
+  #### Deployment
+  - checks health of a pod
+  - restarts pods container if it terminates
+  - manage the creation and scaling of pods
+
+  ### Service
+  - defines policy to access pods
+  - targeted pods are defined usually by a selector
+  - define a selector to match pods, port you want to expose and target port
+  - A Kubernetes Service is an abstraction which defines a logical set of Pods running somewhere in your cluster, that all provide the same functionality.
+  - When created a clusterIP is assigned
+
+
+  #### ClusterIP
+  - default Kubernetes service
+  - creates service inside cluster that other apps in the cluster can access
+  - no external access (from the internet) unless you use a Kubernetes proxy
+  - https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0
+
+
+
+  #### ClusterIP vs NodePort vs LoadBalancer
+
+
 </details>
 
 <details>
@@ -421,6 +472,12 @@
   ### Kubectl
 
   ```
+  # display all contexts
+  kubectl config get-contexts
+
+  # display current context
+  kubectl config current-context 
+
   # exec on to pod on namespace
   kubectl exec -ti --namespace=${NAMESPACE} ${POD} bash
 
@@ -460,6 +517,9 @@
   # get pods on namespace
   kubectl get pods --namespace=${NAMESPACE}
 
+  # deploy deployment
+  kubectl apply -f deployment.yaml --namespace=${NAMESPACE} 
+
   # example env variables
   export NAMESPACE=dev
   export POD=web-app
@@ -477,22 +537,10 @@
   - A tool that allows you to run kubernetes locally
   - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine
 
-  #### Install
-
   ```
-  # VirtualBox
-  sudo add-apt-repository multiverse && sudo apt-get update
-
-  # Minikube
-  # https://kubernetes.io/docs/tasks/tools/install-minikube/#before-you-begin
-  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-    && chmod +x minikube
-
-  sudo install minikube /usr/local/bin
+  # start minikube
+  minikube start
   ```
-
-  Note: make sure you have virtualization enabled on you machine, this needs to be
-  enabled from the bios
 </details>
 
 <details>
@@ -530,7 +578,7 @@
   ```
 
 
-  `PROVIDER` = name, `TYPE` = type of resource, `NAME` = identifier, `CONFIG` = arguments
+  `PROVIDER` = provider name, `TYPE` = type of resource, `NAME` = identifier, `CONFIG` = arguments
 </details>
 
 <details>
@@ -550,7 +598,7 @@
   #### ECS
   - Amazon Elastic Container
   
-  Clusters:
+  ##### Clusters
   - A regional group of container instances on which you can run task requests
   - Each account receives a default cluster the first time you use the Amazon ECS service. 
   - Clusters may contain more than one Amazon EC2 instance type.
@@ -592,6 +640,9 @@
   #### CIDR 
   - Classless Inter-Domain Routing
   - a method for allocating IP addresses and IP routing
+
+  ### ENI
+  - Elastic network interfaces
 
   #### Ingress
   Ingress is an object that allows access to your Kubernetes services from outside the Kubernetes cluster
