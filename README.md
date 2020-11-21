@@ -15,9 +15,77 @@
 <details>
   <summary>Elasticsearch 7</summary>
 
-  ### Elasticsearch 7 
+  
+  ### Create
+  Create an index with mappings
+  ```
+  PUT /transaction
+  {
+      "mappings": {
+          "dynamic": true,
+          "properties" : {
+              "commission" : {
+                  "type" : "long"
+              },
+              "id" : {
+                  "type" : "integer"
+              },
+              "title" : {
+                  "type" : "text"
+              },
+              "user" : {
+                  "properties" : {
+                      "user_id" : {
+                          "type" : "integer"
+                      }
+                  }
+              },
+              "created_at" : {
+                  "type" : "date",
+                  "format":"yyyy-MM-dd HH:mm:ss"
+              }
+          }
+      }
+  }
+  ```
+  
+  Create documents
+  ```
+  POST /user/_doc/78
+  {
+    "user_id": 78,
+    "name": "matt smith"
+  }
+  ```
+  
+  ```
+  POST /transaction/_doc/1
+  {
+    "transaction_id": 1,
+    "user_id": 78,
+    "network_transaction_id": 101,
+    "commission": 12
+  }
+  ```
+  
+  ### List/search
+  
+  List all indices
+  ```
+  GET _cat/indices
+  ```
 
-  #### Search everying
+  List all docs from an index
+  ```
+  GET /cdnctl-messages/_search
+  {
+    "query": {
+      "match_all": {}
+    }
+  }
+  ```
+  
+  Search for everying
   ```
   GET _search
   {
@@ -27,62 +95,23 @@
   }
   ```
   
-  #### Index
-  #### Create
-  Create an index with mappings
+  Returns all documents within an index
   ```
-  PUT /transaction
-{
-    "mappings": {
-        "dynamic": true,
-        "properties" : {
-            "commission" : {
-                "type" : "long"
-            },
-            "id" : {
-                "type" : "integer"
-            },
-            "title" : {
-                "type" : "text"
-            },
-            "user" : {
-                "properties" : {
-                    "user_id" : {
-                        "type" : "integer"
-                    }
-                }
-            },
-            "created_at" : {
-                "type" : "date",
-                "format":"yyyy-MM-dd HH:mm:ss"
-            }
-        }
-    }
-}
+  GET /transaction/_search
+  ```
+
+  Returns a single document within an index
+  ```
+  GET /transaction/_doc/1
   ```
   
-  #### List
-  ```
-  GET _cat/indices
-  ```
-
-  #### List all from an index
-  ```
-  GET /cdnctl-messages/_search
-  {
-    "query": {
-      "match_all": {}
-    }
-  }
-  ```
-
-
-  #### Delete
+  
+  ### Delete
   ```
   DELETE /transaction
   ```
 
-  #### Mapping
+  ### Mapping
 
   #### Mapping Types
   - Mapping types are deprecated in 6.0.0.
@@ -105,43 +134,11 @@
   }
   ```
   
-  #### Create documents
-  ```
-  POST /user/_doc/78
-  {
-    "user_id": 78,
-    "name": "matt smith"
-  }
-  ```
-  
-  ```
-  POST /transaction/_doc/1
-  {
-    "transaction_id": 1,
-    "user_id": 78,
-    "network_transaction_id": 101,
-    "commission": 12
-  }
-  ```
-
-  #### Search documents
-  
-  Returns all documents within an index
-  ```
-  GET /transaction/_search
-  ```
-
-  Returns a single document within an index
-  ```
-  GET /transaction/_doc/1
-  ```
-
-  #### Percolators
+  ### Percolators
   - A percolator is a reverse search
   - We store queries as percolators and run documents against them
-  - 
 
-  #### Scripts
+  ### Scripts
 
   Return a generated object with a boosted transaction commission
 
@@ -175,7 +172,7 @@
   }
   ```
 
-  #### References
+  ### References
   - https://logz.io/blog/removal-elasticsearch-mapping-types/
   - https://www.elastic.co/guide/en/elasticsearch/painless/current/painless-operators-reference.html
   - https://www.elastic.co/guide/en/elasticsearch/painless/current/painless-bucket-script-agg-context.html#painless-bucket-script-agg-context
