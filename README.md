@@ -45,29 +45,10 @@
             "title" : {
                 "type" : "text"
             },
-            "merchant_id" : {
-                "type" : "integer"
-            },
-            "network_transaction_id" : {
-                "type" : "integer"
-            },
             "user" : {
                 "properties" : {
                     "user_id" : {
                         "type" : "integer"
-                    },
-                    "user_type" : {
-                        "type" : "integer"
-                    }
-                }
-            },
-            "rate" : {
-                "properties" : {
-                    "rate_id" : {
-                        "type" : "long"
-                    },
-                    "multiplier" : {
-                        "type" : "float"
                     }
                 }
             },
