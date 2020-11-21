@@ -17,6 +17,16 @@
 
   ### Elasticsearch 7 
 
+  #### Search everying
+  ```
+  GET _search
+  {
+    "query": {
+      "match_all": {}
+    }
+  }
+  ```
+  
   #### Index
   #### Create
   Create an index with mappings
@@ -74,6 +84,17 @@
   ```
   GET _cat/indices
   ```
+
+  #### List all from an index
+  ```
+  GET /cdnctl-messages/_search
+  {
+    "query": {
+      "match_all": {}
+    }
+  }
+  ```
+
 
   #### Delete
   ```
