@@ -32,6 +32,9 @@
             "id" : {
                 "type" : "integer"
             },
+            "title" : {
+                "type" : "text"
+            },
             "merchant_id" : {
                 "type" : "integer"
             },
@@ -65,6 +68,11 @@
         }
     }
 }
+  ```
+  
+  #### List
+  ```
+  GET _cat/indices
   ```
 
   #### Delete
