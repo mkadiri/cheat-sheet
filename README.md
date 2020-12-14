@@ -445,6 +445,15 @@
   - sits in a worker node
   - has one or more containers
   - needs to specify container images
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
   #### Deployment
@@ -685,6 +694,9 @@
   # composer not pulling latest library code
   composer clearcache
   composer upgrade
+  
+  # view php ini information
+  php --ini
   ```
 </details>
 
