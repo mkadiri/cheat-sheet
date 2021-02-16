@@ -404,6 +404,9 @@
   
   # update config file and restart apache
   docker exec -ti ${CONTAINER} bash -c "echo 'xdebug.remote_host = 172.17.0.1' >> /etc/php/7.1/mods-available/xdebug.ini && service apache2 reload"
+
+  # override entrypoint on docker run
+  docker run -ti --entrypoint "" alpine/helm:3.2.1  sh
   ```
 </details>
 
