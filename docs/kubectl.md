@@ -2,7 +2,7 @@
 
 ## Commands
 
-```
+```shell
 # example env variables
 export NAMESPACE=dev
 export POD=web-app
