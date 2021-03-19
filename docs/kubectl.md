@@ -1,4 +1,13 @@
+# Kubectl
+
+## Commands
+
 ```
+# example env variables
+export NAMESPACE=dev
+export POD=web-app
+export CONTAINER=web-app-1
+
 # display all contexts
 kubectl config get-contexts
 
@@ -47,11 +56,6 @@ kubectl get pods --namespace=${NAMESPACE}
 # deploy deployment
 kubectl apply -f deployment.yaml --namespace=${NAMESPACE} 
 
-# example env variables
-export NAMESPACE=dev
-export POD=web-app
-export CONTAINER=web-app-1
-
 # get volume
 kubectl --context=sandbox --namespace=confused get pvc
 
@@ -67,8 +71,6 @@ kubectl delete statefulset --context=sandbox --namespace=confused mysql
 # get nodes
 kubectl get nodes
 
-
-# metrics
 # requires metrics-server running on the cluster
 
 # view node cpu/memory
@@ -76,4 +78,114 @@ kubectl top nodes
 
 # view pod cpu/memory
 kubectl top pods
+
+# get horizontal pod autoscalers
+kubectl get hpa
+
+# descibe horizontal pod autoscalers
+kubectl describe hpa ${POD}
+
+# scale replicas
+kubectl scale --replicas=1 deployment/${DEPLOYMENT_NAME}
+
+# get vertical pod autoscalers
+kubectl get vpa
+
+# describe vertical pod autoscalers
+kubectl describe vpa ${POD}
+```
+
+
+
+
+## Vertical Pod Autoscaler
+
+https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
+
+### Install k8 resources
+
+Prerequisites
+- install openssl to version 1.1.1 or higher (needs to support -addext option)
+
+```
+# clone repo
+git clone https://github.com/kubernetes/autoscaler.git
+
+# verify kube config
+./autoscaler/vertical-pod-autoscaler/hack/vpa-process-yamls.sh print
+
+# run install
+./autoscaler/vertical-pod-autoscaler/hack/vpa-up.sh
+```
+
+### Uninstall k8 resources
+
+```shell
+./autoscaler/vertical-pod-autoscaler/hack/vpa-down.sh
+
+```
+
+### k8 config example
+
+```yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  labels:
+    type: application
+    service: my-app
+  name: my-app
+  namespace: my-ns
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  updatePolicy:
+    updateMode: "Off"
+```
+
+
+
+
+## Horizontal Pod Autoscaler
+
+https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+https://www.pulumi.com/docs/reference/pkg/kubernetes/autoscaling/v2beta2/horizontalpodautoscalerlist/#
+
+### k8 config example
+
+```yaml
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app
+  namespace: my-ns
+spec:
+  minReplicas: 1
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageValue: 500Mi
+    - type: Pods
+      pods:
+        metric:
+          name: packets-per-second
+        target:
+          type: AverageValue
+          averageValue: 1k
 ```
