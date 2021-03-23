@@ -28,3 +28,4 @@
 
 [Python 3](docs/python-3.md)
 
+[Redis](docs/redis.md)
