@@ -44,11 +44,14 @@ persist bar
 get foo
 get server:name
 
+# get configs
+redis-cli config get "*"
+
 # get all keys
 keys "*"
 
 # get all key/values
-echo "key/value" && for key in $(redis-cli -p 6379 keys \*); do a=$(redis-cli -p 6379 GET $key); echo "$key/$a"; done
+echo "key/value" && for key in $(redis-cli -h aws1-live-redlock-005.ireland.aws.syrupme.net	-p 6379 keys \*); do a=$(redis-cli -p 6379 GET $key); echo "$key/$a"; done
 
 # expire key/value pair in 50 seconds
 expire foo 50
@@ -64,6 +67,12 @@ exists foo
 
 # clear all key/pair values
 flushall
+
+# monitor commands being run
+redis-cli monitor
+
+# view latency times
+redis-cli --latency
 ```
 
 ## References

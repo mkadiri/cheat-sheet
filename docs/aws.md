@@ -22,6 +22,8 @@
 - Amazon elastic load balancer
 - Automatically distributes incoming traffic across multiple targets
 - such as EC2 instances, containers, IP addresses, and Lambda functions
+- can detect health of instances
+-   
 - https://aws.amazon.com/elasticloadbalancing/
 
 ## VPC
