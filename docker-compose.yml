@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+
+  frontend-microservice:
+    image: github.com/mkadiri/frontend-microservice:local
+    container_name: frontend-microservice
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    ports:
+      - 4200:4200
+
+networks:
+  default:
+    external:
+      name: auto

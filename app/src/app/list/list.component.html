@@ -1,0 +1,29 @@
+<div style="font-size: 14px">
+  <div style="margin-bottom: 50px;">
+    <h4>aws1-test environments</h4>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Fqdn</th>
+        <th>Age</th>
+        <th>Owner</th>
+        <th>Branch</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor = "let environment of environments | tableFilter:tableFilterInput">
+        <td>{{environment.name}}</td>
+        <td>{{environment.fqdn}}</td>
+        <td>{{environment.age}}</td>
+        <td>{{environment.owner}}</td>
+        <td>{{environment.branch}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-bottom" style="  border-top:1px solid lightgray;">
+    <input [(ngModel)]="tableFilterInput" placeholder="Filter"  class="form-control" />
+  </nav>
+</div>
