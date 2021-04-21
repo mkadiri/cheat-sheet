@@ -12,6 +12,8 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { TableFilterPipe } from './filter/table-filter.pipe';
+import {SidebarModule} from "./sidebar/sidebar.module";
+import {HomeLayoutComponent} from "./layout/home-layout.component";
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { TableFilterPipe } from './filter/table-filter.pipe';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SidebarModule
   ],
   declarations: [
     AppComponent,
@@ -28,7 +31,8 @@ import { TableFilterPipe } from './filter/table-filter.pipe';
     HeroDetailComponent,
     MessagesComponent,
     HeroSearchComponent,
-    TableFilterPipe
+    TableFilterPipe,
+    HomeLayoutComponent
   ],
   bootstrap: [ AppComponent ]
 })
