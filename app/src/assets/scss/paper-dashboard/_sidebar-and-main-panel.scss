@@ -1,0 +1,150 @@
+.wrapper{
+  position: relative;
+  top: 0;
+  height: 100vh;
+  background: #1d1d1d;
+
+  &.wrapper-full-page{
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+.sidebar{
+  position: fixed;
+  top: 0;
+  height: 100%;
+  bottom: 0;
+  width: 260px;
+  left: 0;
+  z-index: 1030;
+  border-right: 1px solid #2c2c2c;
+  background: #151515;
+
+  .logo{
+    position: relative;
+    z-index: 4;
+    height: 70px;
+    border-bottom: 1px #2c2c2c solid;
+    border-right: 1px solid #2c2c2c;
+    background: #111111;
+
+    a {
+      margin: 0;
+      padding: 20px;
+      color: #FFF;
+      display: block;
+      text-decoration: none;
+      position: relative;
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 30px;
+    }
+
+    p{
+      float: left;
+      font-size: 20px;
+      margin: 0;
+      padding: 0;
+      color: #FFFFFF;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-transform: uppercase;
+      display: block;
+      white-space: nowrap;
+      text-decoration: none;
+      line-height: 20px;
+      overflow: hidden;
+    }
+  }
+
+  .sidebar-wrapper{
+    position: relative;
+    height: calc(100vh - 75px);
+    overflow: auto;
+    width: 260px;
+    z-index: 4;
+    padding-bottom: 100px;
+
+    .dropdown .dropdown-backdrop{
+      display: none !important;
+    }
+
+    .navbar-form{
+      border: none;
+    }
+  }
+
+  .navbar-minimize{
+    position: absolute;
+    right: 20px;
+    top: 2px;
+    opacity: 0;
+
+  }
+
+  .nav{
+    margin-top: 20px;
+    display: block;
+    //background: #2957b0;
+    padding: 0;
+
+    li{
+      margin: 0;
+
+      > a{
+        margin: 0;
+        padding: 0 0 0 20px;
+        color: #FFFFFF;
+        //background: #3a283d;
+        display: block;
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 30px;
+      }
+
+      &.active > a,
+      &.active > a > i {
+        opacity: 1;
+      }
+
+      &:hover:not(.active) > a,
+      &:focus:not(.active) > a {
+        opacity: 1;
+      }
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .sub-nav{
+    display: block;
+    padding: 0;
+
+    li{
+      margin: 0;
+
+      > a{
+        margin: 0;
+        padding: 0 0 0 40px;
+        color: #b8d8d8;
+        //background: #772510;
+        display: block;
+        text-decoration: none;
+        position: relative;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 30px;
+      }
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

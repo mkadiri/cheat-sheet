@@ -1,0 +1,24 @@
+
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a href="">
+      Cheat sheet
+    </a>
+  </div>
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+            <ul class="sub-nav">
+              <li *ngFor="let child of menuItem.children" routerLinkActive="active" >
+                <a [routerLink]="[child.path]">
+                  <i class="nc-icon {{child.icon}}"></i>
+                  <p>{{child.title}}</p>
+                </a>
+              </li>
+            </ul>
+        </li>
+    </ul>
+</div>
