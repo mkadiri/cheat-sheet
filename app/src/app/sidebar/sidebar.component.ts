@@ -41,13 +41,13 @@ export const NAV: NavInfo[] = [
         class: '',
         children: [
           {
-            path: '/kubectl/commands',
+            path: '/kubectl',
             title: 'commands',
             icon: 'nc-bank',
             class: ''
           },
           {
-            path: '/kubectl/setup',
+            path: '/kubectl',
             title: 'setup',
             icon: 'nc-bank',
             class: ''
