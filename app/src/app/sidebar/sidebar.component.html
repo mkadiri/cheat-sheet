@@ -6,11 +6,19 @@
     </a>
   </div>
     <ul class="nav">
-        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
-            <a [routerLink]="[menuItem.path]">
-                <i class="nc-icon {{menuItem.icon}}"></i>
-                <p>{{menuItem.title}}</p>
-            </a>
+      <li *ngFor="let navItem of nav" class="nav-section">
+        <h4>{{ navItem.category }}</h4>
+        <ul>
+          <li *ngFor="let menuItem of navItem.nav" routerLinkActive="active" class="nav-item">
+            <input type="checkbox" id="{{menuItem.title}}">
+            <div class="nav-ic-wrapper">
+              <div *ngIf="menuItem.children.length > 0" class="nav-ic"></div>
+            </div>
+
+            <label for="{{menuItem.title}}" [routerLink]="menuItem.children.length == 0 ? [menuItem.path] : []">
+              <p>{{menuItem.title}}</p>
+            </label>
+
             <ul class="sub-nav">
               <li *ngFor="let child of menuItem.children" routerLinkActive="active" >
                 <a [routerLink]="[child.path]">
@@ -19,6 +27,8 @@
                 </a>
               </li>
             </ul>
-        </li>
+          </li>
+        </ul>
+      </li>
     </ul>
 </div>

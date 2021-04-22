@@ -14,19 +14,89 @@ export interface RouteInfo {
     }[];
 }
 
+export interface NavInfo {
+  category: string;
+  nav: {
+    path: string;
+    title: string;
+    icon: string;
+    class: string
+    children: {
+      path: string;
+      title: string;
+      icon: string;
+      class: string
+    }[];
+  }[];
+}
 
-// {
-//   path: string;
-//   children: {
-//     path: string;
-//     icon: string;
-//     title: string; class: string
-//   }[];
-//   icon: string;
-//   title: string;
-//   class: string
-// } | { path: string; icon: string; title: string; class: string } | { path: string; icon: string; title: string; class: string } | { path: string; icon: string; title: string; class: string } | { path: string; icon: string; title: string; class: string } | { path: string; icon: string; title: string; class: string } | { path: string; icon: string; title: string; class: string } | { path: string; icon: string; title: string; class: string })[] = [
-
+export const NAV: NavInfo[] = [
+  {
+    category: "DevOps",
+    nav: [
+      {
+        path: '/kubectl',
+        title: 'Kubectl',
+        icon: 'nc-bank',
+        class: '',
+        children: [
+          {
+            path: '/kubectl/commands',
+            title: 'commands',
+            icon: 'nc-bank',
+            class: ''
+          },
+          {
+            path: '/kubectl/setup',
+            title: 'setup',
+            icon: 'nc-bank',
+            class: ''
+          }
+        ]
+      }
+    ]
+  },
+  {
+    category: "Golang",
+    nav: [
+      {
+        path: '/introduction',
+        title: 'Introduction',
+        icon: 'nc-bank',
+        class: '',
+        children: [
+          {
+            path: '/introduction/hello-world',
+            title: 'Hello world',
+            icon: 'nc-bank',
+            class: ''
+          }
+        ]
+      },
+      {
+        path: '/golang/intermediate',
+        title: 'Intermediate',
+        icon: 'nc-bank',
+        class: '',
+        children: []
+      },
+      {
+        path: '/golang/advanced',
+        title: 'Advanced',
+        icon: 'nc-bank',
+        class: '',
+        children: [
+          {
+            path: '/goland/advanced/super-world',
+            title: 'Super world',
+            icon: 'nc-bank',
+            class: ''
+          }
+        ]
+      }
+    ]
+  }
+]
 
 export const ROUTES: RouteInfo[] = [
   {
@@ -74,7 +144,9 @@ export const ROUTES: RouteInfo[] = [
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    public nav: any[];
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.nav = NAV.filter(navItem => navItem);
     }
 }

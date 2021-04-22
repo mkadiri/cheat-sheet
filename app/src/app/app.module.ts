@@ -14,6 +14,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { TableFilterPipe } from './filter/table-filter.pipe';
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {HomeLayoutComponent} from "./layout/home-layout.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HomeLayoutComponent} from "./layout/home-layout.component";
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    SidebarModule
+    SidebarModule,
+    FontAwesomeModule
   ],
   declarations: [
     AppComponent,
