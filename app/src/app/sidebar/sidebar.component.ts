@@ -74,8 +74,8 @@ export const NAV: NavInfo[] = [
         ]
       },
       {
-        path: '/golang/intermediate',
-        title: 'Intermediate',
+        path: '/dashboard',
+        title: 'Dashboard',
         icon: 'nc-bank',
         class: '',
         children: []
