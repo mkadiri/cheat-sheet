@@ -127,6 +127,30 @@
           padding: 0;
         }
       }
+
+      .modal-wrapper{
+        padding: 10px;
+
+        button.modal-toggle{
+          padding: 0;
+          background: #242222;
+          width: 100%;
+          height: 30px;
+          color: #908e8e;
+          border: 1px solid #3d3b3b;
+          vertical-align: top; /* here */
+          font-size: 14px;
+        }
+
+        .modal-dialog{
+          margin-top: 100px;
+          opacity: 1;
+
+          .modal-content{
+            background: #3d3b3b;
+          }
+        }
+      }
     }
   }
 }

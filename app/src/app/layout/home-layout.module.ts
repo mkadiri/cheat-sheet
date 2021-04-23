@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {KubectlComponent} from "../pages/kubectl/kubectl.component";
 import { ClipboardModule } from 'ngx-clipboard';
 import { CodeBoxComponent } from '../code-box/code-box.component';
+// import { ModalComponent } from '../modal/modal.component';
 
 @NgModule({
   imports: [
