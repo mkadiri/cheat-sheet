@@ -83,8 +83,36 @@ $sidebar-width: calc(100% - 260px) !default;
       background: #1d1d1d;
     }
 
-    code{
-      color: #908e8e;
+    .code-wrapper{
+      width: 700px;
+      background: #1c1b1b;
+      padding: 5px;
+      float: left;
+      margin-bottom: 10px;
+      margin-right: 300px;
+
+
+      p{
+        color: #686666;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+      }
+
+      code{
+        color: #908e8e;
+      }
+
+      button{
+        padding: 0;
+        background: #242222;
+        width: 80px;
+        height: 30px;
+        color: #908e8e;
+        float: right;
+        border: 1px solid #3d3b3b;
+        vertical-align: top; /* here */
+      }
     }
   }
 
@@ -93,7 +121,7 @@ $sidebar-width: calc(100% - 260px) !default;
   .content{
     padding: 0 30px 30px;
     min-height: calc(100vh - 123px);
-    margin-top: 93px;
+    margin-top: 30px;
   }
 
   .navbar{

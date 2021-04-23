@@ -13,3 +13,6 @@ run:
 
 logs:
 	docker logs -f ${IMAGE}
+
+shell:
+	docker exec -ti ${IMAGE} sh

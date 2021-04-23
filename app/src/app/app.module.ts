@@ -9,7 +9,8 @@ import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {HomeLayoutComponent} from "./layout/home-layout.component";
-
+import { ClipboardModule } from 'ngx-clipboard';
+import { CodeBoxComponent } from './code-box/code-box.component';
 
 @NgModule({
   imports: [
@@ -18,11 +19,13 @@ import {HomeLayoutComponent} from "./layout/home-layout.component";
     AppRouting,
     HttpClientModule,
     SidebarModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ClipboardModule
   ],
   declarations: [
     AppComponent,
-    HomeLayoutComponent
+    HomeLayoutComponent,
+    CodeBoxComponent
   ],
   bootstrap: [ AppComponent ]
 })
