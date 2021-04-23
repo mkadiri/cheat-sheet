@@ -26,21 +26,23 @@ export class CodeBoxComponent implements OnInit {
   }
 
   set code(code: string) {
+    code = code.replace(/^.*\n/g,"")
     this._code = code;
   }
 
-  @Input()
-  get elemId(): string {
-    return this._elemId;
-  }
+  // @Input()
+  // get elemId(): string {
+  //   return this._elemId;
+  // }
 
-  set elemId(elemId: string) {
-    this._elemId = elemId;
-  }
+  // set elemId(elemId: string) {
+  //   this._elemId = elemId;
+  // }
 
-  // elemId = Math.floor((Math.random()*6)+1);
+  elemId = Math.random().toString(36).substring(2, 15)
 
-  copyToClipboard(inputTarget: string) {
+  copyToClipboard() {
+    console.log(this.elemId)
     let textarea = null;
     textarea = document.createElement("textarea");
     textarea.value = "asdsd";
@@ -55,7 +57,7 @@ export class CodeBoxComponent implements OnInit {
     document.body.appendChild(textarea);
     // Set and select the value (creating an active Selection range).
 
-    let elem = document.getElementById(inputTarget)
+    let elem = document.getElementById(this.elemId)
 
     textarea.value = elem.innerText;
     textarea.select();
@@ -74,6 +76,9 @@ export class CodeBoxComponent implements OnInit {
   }
 
   faCopy = faCopy;
+
+
+
 
   ngOnInit(): void {
   }

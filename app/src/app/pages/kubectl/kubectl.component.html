@@ -1,14 +1,52 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="card ">
+    <div class="card">
       <div class="card-header">
         <h5 class="card-title">Kubectl commands</h5>
       </div>
       <div class="card-body">
         <app-code-box
-          id="123"
+          comment="display all contexts"
+          code="
+kubectl config get-contexts"
+        ></app-code-box>
+
+        <app-code-box
           comment="this is a comment"
-          code="this is coded"
+          code="
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app
+  namespace: my-ns
+spec:
+  minReplicas: 1
+  maxReplicas: 5
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 75
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageValue: 500Mi
+    - type: Pods
+      pods:
+        metric:
+          name: packets-per-second
+        target:
+          type: AverageValue
+          averageValue: 1k
+"
         ></app-code-box>
       </div>
     </div>

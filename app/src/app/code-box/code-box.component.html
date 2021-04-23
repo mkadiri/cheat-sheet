@@ -1,11 +1,9 @@
 <div class="code-wrapper">
-  <button (click)="copyToClipboard('inputTarget')">
+  <button (click)="copyToClipboard()">
     <fa-icon [icon]="faCopy"></fa-icon>
   </button>
   <p>
-    # {{comment}} {{elemId}}
+    # {{comment}}
   </p>
-  <code id="inputTarget">
-    {{code}}
-  </code>
+  <pre><code id="{{elemId}}">{{code}}</code></pre>
 </div>

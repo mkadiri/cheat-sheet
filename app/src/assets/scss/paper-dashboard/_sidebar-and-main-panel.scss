@@ -95,8 +95,14 @@ $sidebar-width: calc(100% - 260px) !default;
       p{
         color: #686666;
         padding: 0;
+        padding-bottom: 5px;
         margin: 0;
         font-size: 14px;
+      }
+
+      pre{
+        padding: 0;
+        margin: 0;
       }
 
       code{
