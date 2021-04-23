@@ -5,54 +5,11 @@
         <h5 class="card-title">Kubectl commands</h5>
       </div>
       <div class="card-body">
-        <div class="code-wrapper">
-          <button (click)="copyToClipboard('inputTarget')">
-            <fa-icon [icon]="faCopy" size="lg"></fa-icon>
-          </button>
-          <p>
-            # display all contexts
-          </p>
-          <code ngNonBindable id="inputTarget">
-            kubectl config get-contexts
-          </code>
-        </div>
-
-        <div class="code-wrapper">
-          <button (click)="copyToClipboard('inputTarget')">
-            <fa-icon [icon]="faCopy" size="lg"></fa-icon>
-          </button>
-          <p>
-            # exec on to pod on namespace
-          </p>
-          <code ngNonBindable id="inputTarget">
-            kubectl exec -ti --namespace=$NAMESPACE $POD bash
-          </code>
-        </div>
-
-        <div class="code-wrapper">
-          <button (click)="copyToClipboard('inputTarget')">
-            <fa-icon [icon]="faCopy" size="lg"></fa-icon>
-          </button>
-          <p>
-            # exec mysql command on pod
-          </p>
-          <code ngNonBindable id="inputTarget">
-            kubectl exec -ti --namespace=$NAMESPACE $POD mysql <<< "show tables;"
-          </code>
-        </div>
-
-        <div class="code-wrapper">
-          <button (click)="copyToClipboard('inputTarget')">
-            <fa-icon [icon]="faCopy" size="lg"></fa-icon>
-          </button>
-          <p>
-            # display all contexts
-          </p>
-          <code ngNonBindable id="inputTarget">
-            kubectl config get-contexts
-          </code>
-        </div>
-
+        <app-code-box
+          id="123"
+          comment="this is a comment"
+          code="this is coded"
+        ></app-code-box>
       </div>
     </div>
   </div>

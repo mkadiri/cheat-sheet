@@ -11,6 +11,7 @@ import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {KubectlComponent} from "../pages/kubectl/kubectl.component";
 import { ClipboardModule } from 'ngx-clipboard';
+import { CodeBoxComponent } from '../code-box/code-box.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ClipboardModule } from 'ngx-clipboard';
   ],
   declarations: [
     DashboardComponent,
-    KubectlComponent
+    KubectlComponent,
+    CodeBoxComponent
   ]
 })
 
