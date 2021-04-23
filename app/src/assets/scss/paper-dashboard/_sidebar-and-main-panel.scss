@@ -31,7 +31,7 @@
       a {
         margin: 0;
         padding: 20px;
-        color: #FFF;
+        color: #908e8e;
         display: block;
         text-decoration: none;
         position: relative;
@@ -45,7 +45,7 @@
         font-size: 20px;
         margin: 0;
         padding: 0;
-        color: #FFFFFF;
+        color: #908e8e;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         text-transform: uppercase;
         display: block;
@@ -77,14 +77,14 @@ $sidebar-width: calc(100% - 260px) !default;
 
   .card {
     background: #2c2c2c;
-    color: #FFFFFF;
+    color: #908e8e;
 
     .card-header{
       background: #1d1d1d;
     }
 
     code{
-      color: white;
+      color: #908e8e;
     }
   }
 

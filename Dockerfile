@@ -1,6 +1,7 @@
 FROM node:15-alpine3.13
 
 RUN apk add --update --no-cache git && \
+    npm install -g npm@7.11.0 && \
     npm install -g @angular/cli@10.1.3
 
 COPY entrypoint.sh /entrypoint.sh
