@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AdminLayoutRoutes } from './home-layout.routing';
@@ -12,7 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {KubectlComponent} from "../pages/kubectl/kubectl.component";
 import { ClipboardModule } from 'ngx-clipboard';
 import { CodeBoxComponent } from '../code-box/code-box.component';
-// import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @NgModule({
   imports: [
@@ -21,12 +21,14 @@ import { CodeBoxComponent } from '../code-box/code-box.component';
     FormsModule,
     NgbModule,
     ClipboardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
     KubectlComponent,
-    CodeBoxComponent
+    CodeBoxComponent,
+    ModalComponent
   ]
 })
 

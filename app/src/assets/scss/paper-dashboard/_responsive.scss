@@ -1,5 +1,9 @@
 @media screen and (max-width: 991px){
-
+  .modal-wrapper{
+    button{
+      display: none;
+    }
+  }
   .navbar {
     padding: 0;
 
@@ -304,6 +308,7 @@
   .nav-tabs-navigation.verical-navs {
     padding: 0px 2px;
   }
+
 }
 
 @media screen and (min-width: 768px){
@@ -318,7 +323,9 @@
   }
 }
 
+// react to width collapsed
 @media screen and (min-width: 992px){
+
     .navbar-collapse{
         background: none !important;
     }

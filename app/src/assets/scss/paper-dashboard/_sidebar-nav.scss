@@ -127,68 +127,6 @@
           padding: 0;
         }
       }
-
-      .modal-wrapper{
-        padding: 10px;
-
-        button{
-          padding: 0;
-          background: #242222;
-          height: 30px;
-          width: 80px;
-          color: #908e8e;
-          border: 1px solid #3d3b3b;
-          vertical-align: top; /* here */
-          font-size: 14px;
-        }
-
-        button.modal-toggle{
-          width: 100%;
-        }
-
-        .app-modal-footer{
-          button{
-            margin-left: 20px;
-          }
-        }
-
-        .modal-dialog{
-          margin-top: 100px;
-          border: 1px solid #3d3b3b;
-          color: #908e8e;
-          font-size: 14px;
-
-          .modal-content{
-            background: #1c1b1b;
-
-            .modal-body{
-              border: none;
-            }
-
-            .modal-footer{
-              border: none;
-            }
-          }
-        }
-
-        .input-group{
-          margin-bottom: 10px;
-
-          span{
-            background: #1d1d1d;
-            border: 1px solid #3d3b3b;
-            color: #908e8e;
-            font-size: 14px;
-
-          }
-          input{
-            font-size: 14px;
-            background: #262626;
-            border: 1px solid #3d3b3b;
-            color: #908e8e;
-          }
-        }
-      }
     }
   }
 }
