@@ -1,54 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../shared/hero';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { ValidationService } from '../shared/validation.service';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit {
-  // private _environmentVariables = {
-  //   root: 'environment-variable.kubectl.commands',
-  //   inputs: [
-  //     {
-  //       name: 'context',
-  //       value: ''
-  //     },
-  //     {
-  //       name: 'namespace',
-  //       value: ''
-  //     },
-  //     {
-  //       name: 'pod',
-  //       value: ''
-  //     }
-  //   ]
-  // };
+  private _environmentVariables = {
+    root: 'environment-variable.kubectl.commands',
+    inputs: [
+      {
+        name: 'context',
+        value: ''
+      },
+      {
+        name: 'namespace',
+        value: ''
+      },
+      {
+        name: 'pod',
+        value: ''
+      }
+    ]
+  };
 
   public visible = false;
   public visibleAnimate = false;
 
-  model: Hero;
-  heroForm: FormGroup;
+  form: FormGroup;
   formModelProps = [];
   submitted: boolean;
+  root: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.model = new Hero(18, 'Dr IQ', 'Really Smart', 'Chuck Overstreet', 'iq@superhero.com');
-
     const formModel = {};
-    let validators = [ Validators.required ];
-    for (const prop of Object.keys(this.model)) {
-      if (prop.indexOf('email') !== -1) validators.push(ValidationService.emailValidator);
-      formModel[prop] = new FormControl(this.model[prop], validators);
-      this.formModelProps.push(prop);
-    }
-    this.heroForm = new FormGroup(formModel);
+
+    this._environmentVariables.inputs.forEach((element) => {
+      let value = window.localStorage.getItem(this._environmentVariables.root + '.' + element.name)
+        ? window.localStorage.getItem(this._environmentVariables.root + '.' + element.name)
+        :'';
+
+      this.formModelProps.push(element.name);
+      formModel[element.name] = new FormControl(value);
+    });
+
+    this.form = new FormGroup(formModel);
   }
 
   public show(): void {
@@ -67,25 +66,14 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  // get environmentVariables() {
-  //   this._environmentVariables.inputs.forEach((element) => {
-  //     var value = window.localStorage.getItem(this._environmentVariables.root + '.' + element.name);
-  //     element.value = value;
-  //   });
-  //
-  //   return this._environmentVariables;
-  // }
-  //
-  // public save() {
-  //   this._environmentVariables.inputs.forEach((element) => {
-  //     var value = window.localStorage.getItem(this._environmentVariables.root + '.' + element.name);
-  //     element.value = value;
-  //   });
-  // }
-
   submit() {
     this.submitted = true;
-    alert('asdasd')
-    console.log(this.heroForm)
+
+    Object.keys(this.form.controls).forEach(key => {
+      window.localStorage.setItem(this._environmentVariables.root + '.' + key, this.form.get(key).value);
+    });
+
+    console.log(this.form)
+    this.visibleAnimate = false;
   }
 }
