@@ -1,12 +1,32 @@
-<div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
-     [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <ng-content select=".app-modal-body"></ng-content>
-      </div>
-      <div class="modal-footer">
-        <ng-content select=".app-modal-footer"></ng-content>
+<div class="modal-wrapper">
+  <button class="modal-toggle" type="button" (click)="show()">Environment variables</button>
+  <div (click)="onContainerClicked($event)" class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+       [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}" #modal>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">context</span>
+            </div>
+            <input type="text" class="form-control">
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="">namespace</span>
+            </div>
+            <input type="text" class="form-control">
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="hide()">Close</button>
+          <button type="button">Save</button>
+
+          <ng-content select=".app-modal-footer"></ng-content>
+        </div>
       </div>
     </div>
   </div>

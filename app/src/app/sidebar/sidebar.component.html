@@ -30,31 +30,5 @@
         </ul>
       </li>
     </ul>
-    <div class="modal-wrapper">
-      <button class="modal-toggle" type="button" (click)="modal.show()">Environment variables</button>
-      <app-modal #modal>
-        <div class="app-modal-body">
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="">context</span>
-            </div>
-            <input type="text" class="form-control">
-          </div>
-
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="">namespace</span>
-            </div>
-            <input type="text" class="form-control">
-          </div>
-
-        </div>
-        <div class="app-modal-footer">
-          <button type="button" (click)="modal.hide()">Close</button>
-          <button type="button">Save</button>
-        </div>
-      </app-modal>
-    </div>
-
+    <app-modal></app-modal>
 </div>

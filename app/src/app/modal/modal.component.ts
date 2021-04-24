@@ -8,6 +8,9 @@ export class ModalComponent implements OnInit {
   public visible = false;
   public visibleAnimate = false;
 
+  ngOnInit(): void {
+  }
+
   public show(): void {
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
@@ -23,8 +26,4 @@ export class ModalComponent implements OnInit {
       this.hide();
     }
   }
-
-  ngOnInit(): void {
-  }
-
 }
