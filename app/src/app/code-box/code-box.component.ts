@@ -9,6 +9,7 @@ export class CodeBoxComponent implements OnInit {
   private _comment: string;
   private _code: string;
   private _elemId: string;
+  private _codeOutput: string;
 
   @Input()
   get comment(): string {
@@ -24,28 +25,53 @@ export class CodeBoxComponent implements OnInit {
     return this._code;
   }
 
-  set code(code: string) {
-    code = code.replace(/^.*\n/g,"");
-
-    var found = code.replace(/\\./g, '').match(/\$\w+/g);
-
-
-    console.log(found)
-
-    // code = code.replace(/\$\w+/g, '<span>asd</span>');
-    // code = code.replace(/\$\w+/g, '<div [innerHTML]="foo"></div>');
-
-    this._code = code;
+  get codeOutput(): string {
+    return this._codeOutput
   }
 
-  // @Input()
-  // get elemId(): string {
-  //   return this._elemId;
-  // }
+  set code(code: string) {
+    this._code = code;
 
-  // set elemId(elemId: string) {
-  //   this._elemId = elemId;
-  // }
+    this._codeOutput = code.replace(/^.*\n/g,"");
+
+    for (var i = 0; i < window.localStorage.length; i++) {
+      var key = window.localStorage.key(i);
+      console.log(key);
+      if (key.startsWith("environment-variable.kubectl.commands")) {
+        var pieces = key.split(/[\s.]+/);
+        var envName = '$' + pieces[pieces.length-1];
+
+        this._codeOutput = this._codeOutput.replace(envName, window.localStorage.getItem(key));
+
+        // console.log(window.localStorage.getItem(key));
+
+        // results.push(JSON.parse(window.localStorage.getItem(key)));
+      }
+    }
+
+    // var matches = code.match(/\$\w+/g);
+    // var envVars = {
+    //   'context': 'aws1-live-eks',
+    //   'namespace': 'production'
+    // }
+
+    // if (envVars) {
+    //   envVars.forEach((element) => {
+    //     console.log('elem: ' + element);
+    //   });
+    // }
+
+    // if (matches) {
+    //   matches.forEach((element) => {
+    //     console.log('elem: ' + element);
+    //   });
+    // }
+
+    // code.replace(/\\./g, '').match(/\$\w+/g).forEach((element) => {
+    //   console.log('elem: ' + element);
+    // });
+    // console.log(found)
+  }
 
   elemId = Math.random().toString(36).substring(2, 15)
 

@@ -15,30 +15,65 @@
           code="kubectl config current-context">
         </app-code-box>
 
-<!--        <app-code-box-->
-<!--          comment="exec on to pod on namespace"-->
-<!--          code="kubectl exec -ti &#45;&#45;namespace=$NAMESPACE $POD bash">-->
-<!--        </app-code-box>-->
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
 
-<!--        <app-code-box-->
-<!--          comment="exec mysql command on pod"-->
-<!--          code='kubectl exec -ti &#45;&#45;namespace=$NAMESPACE $POD mysql <<< "show tables;"'>-->
-<!--        </app-code-box>-->
+        <app-code-box
+          comment="exec mysql command on pod"
+          code='kubectl --context=$context --namespace=$namespace exec -ti $pod mysql <<< "show tables;"'>
+        </app-code-box>
 
-<!--        <app-code-box-->
-<!--          comment="exec on to pod on namespace"-->
-<!--          code="kubectl exec -ti &#45;&#45;namespace=$NAMESPACE $POD bash">-->
-<!--        </app-code-box>-->
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
 
-<!--        <app-code-box-->
-<!--          comment="exec on to pod on namespace"-->
-<!--          code="kubectl exec -ti &#45;&#45;namespace=$NAMESPACE $POD bash">-->
-<!--        </app-code-box>-->
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
 
-<!--        <app-code-box-->
-<!--          comment="exec on to pod on namespace"-->
-<!--          code="kubectl exec -ti &#45;&#45;namespace=$NAMESPACE $POD bash">-->
-<!--        </app-code-box>-->
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code='
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  labels:
+    type: application
+    service: my-app
+  name: my-app
+  namespace: my-ns
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  updatePolicy:
+    updateMode: "Off"'>
+        </app-code-box>
 
       </div>
     </div>

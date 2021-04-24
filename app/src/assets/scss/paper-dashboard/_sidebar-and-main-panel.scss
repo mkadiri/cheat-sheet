@@ -1,3 +1,8 @@
+body {
+  background: #1d1d1d;
+
+}
+
 .wrapper{
   position: relative;
   top: 0;
@@ -84,7 +89,7 @@ $sidebar-width: calc(100% - 260px) !default;
     }
 
     .code-wrapper{
-      width: 700px;
+      width: 1200px;
       background: #1c1b1b;
       padding: 5px;
       float: left;
