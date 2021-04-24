@@ -3,8 +3,7 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-code-box',
-  templateUrl: './code-box.component.html',
-  // encapsulation: ViewEncapsulation.None
+  templateUrl: './code-box.component.html'
 })
 export class CodeBoxComponent implements OnInit {
   private _comment: string;
@@ -26,7 +25,16 @@ export class CodeBoxComponent implements OnInit {
   }
 
   set code(code: string) {
-    code = code.replace(/^.*\n/g,"")
+    code = code.replace(/^.*\n/g,"");
+
+    var found = code.replace(/\\./g, '').match(/\$\w+/g);
+
+
+    console.log(found)
+
+    // code = code.replace(/\$\w+/g, '<span>asd</span>');
+    // code = code.replace(/\$\w+/g, '<div [innerHTML]="foo"></div>');
+
     this._code = code;
   }
 
