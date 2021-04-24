@@ -5,6 +5,24 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit {
+  private _environmentVariables = {
+    root: 'environment-variable.kubectl.commands',
+    inputs: [
+      {
+        name: 'context',
+        value: ''
+      },
+      {
+        name: 'namespace',
+        value: ''
+      },
+      {
+        name: 'pod',
+        value: ''
+      }
+    ]
+  };
+
   public visible = false;
   public visibleAnimate = false;
 
@@ -25,5 +43,21 @@ export class ModalComponent implements OnInit {
     if ((<HTMLElement>event.target).classList.contains('modal')) {
       this.hide();
     }
+  }
+
+  get environmentVariables() {
+    this._environmentVariables.inputs.forEach((element) => {
+      var value = window.localStorage.getItem(this._environmentVariables.root + '.' + element.name);
+      element.value = value;
+    });
+
+    return this._environmentVariables;
+  }
+
+  public save() {
+    this._environmentVariables.inputs.forEach((element) => {
+      var value = window.localStorage.getItem(this._environmentVariables.root + '.' + element.name);
+      element.value = value;
+    });
   }
 }

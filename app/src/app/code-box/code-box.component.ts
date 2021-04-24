@@ -36,47 +36,19 @@ export class CodeBoxComponent implements OnInit {
 
     for (var i = 0; i < window.localStorage.length; i++) {
       var key = window.localStorage.key(i);
-      console.log(key);
+
       if (key.startsWith("environment-variable.kubectl.commands")) {
         var pieces = key.split(/[\s.]+/);
         var envName = '$' + pieces[pieces.length-1];
 
         this._codeOutput = this._codeOutput.replace(envName, window.localStorage.getItem(key));
-
-        // console.log(window.localStorage.getItem(key));
-
-        // results.push(JSON.parse(window.localStorage.getItem(key)));
       }
     }
-
-    // var matches = code.match(/\$\w+/g);
-    // var envVars = {
-    //   'context': 'aws1-live-eks',
-    //   'namespace': 'production'
-    // }
-
-    // if (envVars) {
-    //   envVars.forEach((element) => {
-    //     console.log('elem: ' + element);
-    //   });
-    // }
-
-    // if (matches) {
-    //   matches.forEach((element) => {
-    //     console.log('elem: ' + element);
-    //   });
-    // }
-
-    // code.replace(/\\./g, '').match(/\$\w+/g).forEach((element) => {
-    //   console.log('elem: ' + element);
-    // });
-    // console.log(found)
   }
 
   elemId = Math.random().toString(36).substring(2, 15)
 
   copyToClipboard() {
-    console.log(this.elemId)
     let textarea = null;
     textarea = document.createElement("textarea");
     textarea.value = "asdsd";
