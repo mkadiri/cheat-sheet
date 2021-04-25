@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-md-12">
-    <app-modal></app-modal>
+    <app-modal
+      root="environment-variable.kubectl.commands"
+      [environmentVariables]="['context', 'namespace', 'pod', 'test']">
+    </app-modal>
 
     <div class="card">
       <div class="card-header">
@@ -29,7 +32,7 @@
 
         <app-code-box
           comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+          code=''>
         </app-code-box>
 
         <app-code-box

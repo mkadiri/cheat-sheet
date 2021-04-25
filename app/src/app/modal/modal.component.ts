@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 
@@ -7,47 +7,46 @@ import { FormControl } from '@angular/forms';
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit {
-  private _environmentVariables = {
-    root: 'environment-variable.kubectl.commands',
-    inputs: [
-      {
-        name: 'context',
-        value: ''
-      },
-      {
-        name: 'namespace',
-        value: ''
-      },
-      {
-        name: 'pod',
-        value: ''
-      }
-    ]
-  };
+  private _root: string;
+  private _environmentVariables: string[];
 
   public visible = false;
   public visibleAnimate = false;
-
-  form: FormGroup;
-  formModelProps = [];
-  submitted: boolean;
-  root: string;
-
-  constructor() { }
+  public form: FormGroup;
+  public formModelProps = [];
+  public submitted: boolean;
 
   ngOnInit(): void {
     const formModel = {};
 
-    this._environmentVariables.inputs.forEach((element) => {
-      let value = window.localStorage.getItem(this._environmentVariables.root + '.' + element.name)
-        ? window.localStorage.getItem(this._environmentVariables.root + '.' + element.name)
+    this._environmentVariables.forEach((element) => {
+      let value = window.localStorage.getItem(this._root + '.' + element)
+        ? window.localStorage.getItem(this._root + '.' + element)
         :'';
 
-      this.formModelProps.push(element.name);
-      formModel[element.name] = new FormControl(value);
+      this.formModelProps.push(element);
+      formModel[element] = new FormControl(value);
     });
 
     this.form = new FormGroup(formModel);
+  }
+
+  @Input()
+  set environmentVariables(environmentVariables: string[]) {
+    this._environmentVariables = environmentVariables;
+  }
+
+  get environmentVariables(): string[] {
+    return this._environmentVariables;
+  }
+
+  @Input()
+  set root(root: string) {
+    this._root = root;
+  }
+
+  get root(): string {
+    return this._root;
   }
 
   public show(): void {
@@ -66,11 +65,11 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  submit() {
+  public submit() {
     this.submitted = true;
 
     Object.keys(this.form.controls).forEach(key => {
-      window.localStorage.setItem(this._environmentVariables.root + '.' + key, this.form.get(key).value);
+      window.localStorage.setItem(this.root + '.' + key, this.form.get(key).value);
     });
 
     console.log(this.form)
