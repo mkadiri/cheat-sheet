@@ -4,19 +4,15 @@
        [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}" #modal>
     <div class="modal-dialog">
       <form [formGroup]="form" (ngSubmit)="submit()">
-
         <div class="modal-content">
           <div class="modal-body">
-
             <div *ngFor="let prop of formModelProps" class="input-group">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="">{{prop}}</span>
               </div>
               <input type="text" class="form-control"  [formControlName]="prop"  value="{{prop}}">
             </div>
-
           </div>
-
           <div class="modal-footer">
             <button type="button" (click)="hide()">Close</button>
             <button type="submit">Save</button>

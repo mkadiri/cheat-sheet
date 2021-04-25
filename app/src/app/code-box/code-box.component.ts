@@ -8,10 +8,13 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 export class CodeBoxComponent implements OnInit {
   private _comment: string;
   private _code: string;
-  // private _codeOutput: string;
-  elemId = Math.random().toString(36).substring(2, 15)
-  faCopy = faCopy;
+  private _elemId: string;
+  private _faCopy: any;
 
+  ngOnInit(): void {
+    this._elemId = Math.random().toString(36).substring(2, 15)
+    this._faCopy = faCopy;
+  }
 
   @Input()
   get comment(): string {
@@ -25,6 +28,18 @@ export class CodeBoxComponent implements OnInit {
   @Input()
   get code(): string {
     return this._code;
+  }
+
+  set code(code: string) {
+    this._code = code;
+  }
+
+  get elemId(): string {
+    return this._elemId;
+  }
+
+  get faCopy(): string {
+    return this._faCopy;
   }
 
   get codeOutput(): string {
@@ -47,14 +62,8 @@ export class CodeBoxComponent implements OnInit {
     return out
   }
 
-  set code(code: string) {
-    this._code = code;
-  }
-
   copyToClipboard() {
-    let textarea = null;
-    textarea = document.createElement("textarea");
-    textarea.value = "asdsd";
+    let textarea = document.createElement("textarea");
     textarea.select();
 
     textarea.style.height = "0px";
@@ -64,18 +73,15 @@ export class CodeBoxComponent implements OnInit {
     textarea.style.top = "-100px";
     textarea.style.width = "0px";
     document.body.appendChild(textarea);
-    // Set and select the value (creating an active Selection range).
 
     let elem = document.getElementById(this.elemId)
 
     textarea.value = elem.innerText;
     textarea.select();
 
-    // Ask the browser to copy the current selection to the clipboard.
     let successful = document.execCommand("copy");
-    if (successful) {
 
-    } else {
+    if (!successful) {
       alert("browser won't allow copy")
     }
 
@@ -83,6 +89,4 @@ export class CodeBoxComponent implements OnInit {
       textarea.parentNode.removeChild(textarea);
     }
   }
-
-  ngOnInit(): void {}
 }

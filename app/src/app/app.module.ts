@@ -8,7 +8,7 @@ import { AppRouting } from './app.routing';
 
 import { AppComponent } from './app.component';
 import {SidebarModule} from "./sidebar/sidebar.module";
-import {HomeLayoutComponent} from "./layout/home-layout.component";
+import {MainComponent} from "./main/main.component";
 import { ClipboardModule } from 'ngx-clipboard';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
@@ -25,7 +25,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
   ],
   declarations: [
     AppComponent,
-    HomeLayoutComponent
+    MainComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [
@@ -38,4 +38,5 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
     }
   ],
 })
+
 export class AppModule { }

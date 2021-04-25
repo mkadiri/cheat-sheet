@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { AdminLayoutRoutes } from './home-layout.routing';
+import { MainRoutes } from './main.routing';
 
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 
@@ -18,7 +18,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+    RouterModule.forChild(MainRoutes),
     FormsModule,
     NgbModule,
     ClipboardModule,
@@ -42,4 +42,4 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
   ],
 })
 
-export class AdminLayoutModule {}
+export class MainModule {}
