@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-code-box',
@@ -8,12 +9,20 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 export class CodeBoxComponent implements OnInit {
   private _comment: string;
   private _code: string;
+  private _environmentVariableRoot: string;
   private _elemId: string;
   private _faCopy: any;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this._elemId = Math.random().toString(36).substring(2, 15)
     this._faCopy = faCopy;
+    this._environmentVariableRoot = 'environment-variable' + this.router.url;
+  }
+
+  get environmentVariableRoot(): string {
+    return this._environmentVariableRoot;
   }
 
   @Input()
@@ -48,8 +57,8 @@ export class CodeBoxComponent implements OnInit {
     for (let i = 0; i < window.localStorage.length; i++) {
       let key = window.localStorage.key(i);
 
-      if (key.startsWith("environment-variable.kubectl.commands")) {
-        let pieces = key.split(/[\s.]+/);
+      if (key.startsWith(this._environmentVariableRoot)) {
+        let pieces = key.split(/[\s/]+/);
         let envName = '$' + pieces[pieces.length - 1];
         let value = window.localStorage.getItem(key);
 

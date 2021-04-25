@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { MainRoutes } from './main.routing';
-
-import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import {MAIN_ROUTES} from "../routing/main.routes";
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {KubectlComponent} from "../pages/kubectl/kubectl.component";
@@ -18,7 +16,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(MainRoutes),
+    RouterModule.forChild(MAIN_ROUTES),
     FormsModule,
     NgbModule,
     ClipboardModule,
@@ -27,7 +25,6 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
     HighlightModule
   ],
   declarations: [
-    DashboardComponent,
     KubectlComponent,
     CodeBoxComponent,
     ModalComponent

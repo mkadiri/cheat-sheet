@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal',
@@ -16,12 +17,16 @@ export class ModalComponent implements OnInit {
   public formModelProps = [];
   public submitted: boolean;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     const formModel = {};
 
+    this._root = 'environment-variable' + this.router.url;
+
     this._environmentVariables.forEach((element) => {
-      let value = window.localStorage.getItem(this._root + '.' + element)
-        ? window.localStorage.getItem(this._root + '.' + element)
+      let value = window.localStorage.getItem(this._root + '/' + element)
+        ? window.localStorage.getItem(this._root + '/' + element)
         :'';
 
       this.formModelProps.push(element);
@@ -38,15 +43,6 @@ export class ModalComponent implements OnInit {
 
   get environmentVariables(): string[] {
     return this._environmentVariables;
-  }
-
-  @Input()
-  set root(root: string) {
-    this._root = root;
-  }
-
-  get root(): string {
-    return this._root;
   }
 
   public show(): void {
@@ -69,7 +65,7 @@ export class ModalComponent implements OnInit {
     this.submitted = true;
 
     Object.keys(this.form.controls).forEach(key => {
-      window.localStorage.setItem(this.root + '.' + key, this.form.get(key).value);
+      window.localStorage.setItem(this._root + '/' + key, this.form.get(key).value);
     });
   }
 }
