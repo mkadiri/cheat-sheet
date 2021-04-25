@@ -31,33 +31,8 @@
         </app-code-box>
 
         <app-code-box
-          comment="exec on to pod on namespace"
-          code=''>
-        </app-code-box>
-
-        <app-code-box
-          comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
-        </app-code-box>
-
-        <app-code-box
-          comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
-        </app-code-box>
-
-        <app-code-box
-          comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
-        </app-code-box>
-
-        <app-code-box
-          comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
-        </app-code-box>
-
-        <app-code-box
-          comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+          comment="exec mysql command on pod"
+          code='kubectl --context=$context --namespace=$namespace exec -ti $pod mysql <<< "echo &apos;hello world&apos;"'>
         </app-code-box>
 
         <app-code-box

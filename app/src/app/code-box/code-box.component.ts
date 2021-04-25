@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,7 +8,6 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 export class CodeBoxComponent implements OnInit {
   private _comment: string;
   private _code: string;
-  private _elemId: string;
   private _codeOutput: string;
 
   @Input()
@@ -82,9 +81,6 @@ export class CodeBoxComponent implements OnInit {
   }
 
   faCopy = faCopy;
-
-
-
 
   ngOnInit(): void {
   }
