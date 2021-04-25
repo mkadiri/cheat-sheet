@@ -25,7 +25,8 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/scss/paper-dashboard.scss"
+              "src/assets/scss/paper-dashboard.scss",
+              "node_modules/highlight.js/styles/atelier-estuary-dark.css"
             ],
             "scripts": []
           },

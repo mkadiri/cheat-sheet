@@ -8,7 +8,10 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 export class CodeBoxComponent implements OnInit {
   private _comment: string;
   private _code: string;
-  private _codeOutput: string;
+  // private _codeOutput: string;
+  elemId = Math.random().toString(36).substring(2, 15)
+  faCopy = faCopy;
+
 
   @Input()
   get comment(): string {
@@ -25,27 +28,28 @@ export class CodeBoxComponent implements OnInit {
   }
 
   get codeOutput(): string {
-    return this._codeOutput
+    let out = this._code.replace(/^.*\n/g, "");
+
+    for (let i = 0; i < window.localStorage.length; i++) {
+      let key = window.localStorage.key(i);
+
+      if (key.startsWith("environment-variable.kubectl.commands")) {
+        let pieces = key.split(/[\s.]+/);
+        let envName = '$' + pieces[pieces.length - 1];
+        let value = window.localStorage.getItem(key);
+
+        if (value) {
+          out = out.replace(envName, window.localStorage.getItem(key));
+        }
+      }
+    }
+
+    return out
   }
 
   set code(code: string) {
     this._code = code;
-
-    this._codeOutput = code.replace(/^.*\n/g,"");
-
-    for (var i = 0; i < window.localStorage.length; i++) {
-      var key = window.localStorage.key(i);
-
-      if (key.startsWith("environment-variable.kubectl.commands")) {
-        var pieces = key.split(/[\s.]+/);
-        var envName = '$' + pieces[pieces.length-1];
-
-        this._codeOutput = this._codeOutput.replace(envName, window.localStorage.getItem(key));
-      }
-    }
   }
-
-  elemId = Math.random().toString(36).substring(2, 15)
 
   copyToClipboard() {
     let textarea = null;
@@ -80,8 +84,5 @@ export class CodeBoxComponent implements OnInit {
     }
   }
 
-  faCopy = faCopy;
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

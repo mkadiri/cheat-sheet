@@ -71,8 +71,5 @@ export class ModalComponent implements OnInit {
     Object.keys(this.form.controls).forEach(key => {
       window.localStorage.setItem(this.root + '.' + key, this.form.get(key).value);
     });
-
-    console.log(this.form)
-    this.visibleAnimate = false;
   }
 }

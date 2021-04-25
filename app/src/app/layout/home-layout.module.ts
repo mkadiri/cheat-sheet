@@ -13,6 +13,7 @@ import {KubectlComponent} from "../pages/kubectl/kubectl.component";
 import { ClipboardModule } from 'ngx-clipboard';
 import { CodeBoxComponent } from '../code-box/code-box.component';
 import { ModalComponent } from '../modal/modal.component';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 @NgModule({
   imports: [
@@ -22,14 +23,23 @@ import { ModalComponent } from '../modal/modal.component';
     NgbModule,
     ClipboardModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HighlightModule
   ],
   declarations: [
     DashboardComponent,
     KubectlComponent,
     CodeBoxComponent,
     ModalComponent
-  ]
+  ],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+      }
+    }
+  ],
 })
 
 export class AdminLayoutModule {}

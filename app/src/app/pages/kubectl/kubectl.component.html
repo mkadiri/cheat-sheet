@@ -12,7 +12,7 @@
       <div class="card-body">
         <app-code-box
           comment="display all contexts"
-          code="kubectl config get-contexts">
+          code="kubectl $namespace config get-contexts">
         </app-code-box>
 
         <app-code-box
@@ -35,10 +35,10 @@
           code='kubectl --context=$context --namespace=$namespace exec -ti $pod mysql <<< "echo &apos;hello world&apos;"'>
         </app-code-box>
 
+
         <app-code-box
           comment="exec on to pod on namespace"
-          code='
-apiVersion: autoscaling.k8s.io/v1
+          code='apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
   labels:
