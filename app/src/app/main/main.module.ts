@@ -13,6 +13,7 @@ import { CodeBoxComponent } from '../code-box/code-box.component';
 import { ModalComponent } from '../modal/modal.component';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import {DockerComponent} from "../pages/docker/docker.component";
+import {AwsCdkCheatSheetComponent} from "../pages/aws-cdk/cheat-sheet/aws-cdk-cheat-sheet.component";
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {DockerComponent} from "../pages/docker/docker.component";
   declarations: [
     KubectlComponent,
     DockerComponent,
+    AwsCdkCheatSheetComponent,
     CodeBoxComponent,
     ModalComponent
   ],

@@ -33,6 +33,16 @@ export const NAVIGATION_ROUTES: NavigationRoutes[] = [
             title: 'Cheat sheet',
           }
         ]
+      },
+      {
+        path: '/aws-cdk',
+        title: 'AWS CDK',
+        children: [
+          {
+            path: '/aws-cdk/cheat-sheet',
+            title: 'Cheat sheet',
+          }
+        ]
       }
     ]
   }
