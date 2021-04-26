@@ -361,37 +361,6 @@
     .sidebar{
       .sidebar-wrapper{
         li.active{
-          > a:not([data-toggle="collapse"]),
-          > [data-toggle="collapse"] + div .nav li {
-            &:before{
-              //border-right: 17px solid $medium-gray;
-              //border-top: 17px solid transparent;
-              //border-bottom: 17px solid transparent;
-              //content: "";
-              //display: inline-block;
-              //position: absolute;
-              //right: -16px;
-              //opacity: 1;
-              //top: 7px;
-              //transition: opacity 150ms ease-in;
-              background: #3a283d;
-            }
-
-            &:after{
-              //border-right: 17px solid $default-body-bg;
-              //border-top: 17px solid transparent;
-              //border-bottom: 17px solid transparent;
-              //content: "";
-              //display: inline-block;
-              //position: absolute;
-              //right: -17px;
-              //opacity: 1;
-              //top: 7px;
-              //transition: opacity 150ms ease-in;
-              background: #3a283d;
-
-            }
-          }
           >[data-toggle="collapse"] + div .nav li {
             a{
               &:before,

@@ -5,7 +5,7 @@
     </a>
   </div>
     <ul class="nav">
-      <li *ngFor="let navItem of nav" class="nav-section">
+      <li *ngFor="let navItem of navigationRoutes" class="nav-section">
         <h4>{{ navItem.category }}</h4>
         <ul>
           <li *ngFor="let menuItem of navItem.nav" routerLinkActive="active" class="nav-item">
@@ -18,7 +18,7 @@
               <p>{{menuItem.title}}</p>
             </label>
 
-            <ul class="sub-nav">
+            <ul class="sub-nav" [ngClass]="{'sub-nav-display': menuItem.path == activeNav}">
               <li *ngFor="let child of menuItem.children" routerLinkActive="active" >
                 <a [routerLink]="[child.path]">
                   <i class="nc-icon {{child.icon}}"></i>

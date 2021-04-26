@@ -15,7 +15,6 @@
         li{
           margin: 0;
 
-
           h4 {
             color: #908e8e;
             padding: 0 0 0 30px;
@@ -82,17 +81,6 @@
                 }
               }
 
-              &.active > a,
-              &.active > a > i,
-              &.active > label,
-              &.active > label > i,
-              &:hover:not(.active) > a,
-              &:focus:not(.active) > a,
-              &:hover:not(.active) > label,
-              &:focus:not(.active) > label {
-                opacity: 1;
-              }
-
               .sub-nav{
                 display: none;
                 padding: 0;
@@ -113,11 +101,22 @@
                   }
                 }
 
+                li.active{
+                  > a:not([data-toggle="collapse"]){
+                    background: #2c2c2c;
+                  }
+                }
+
                 p {
                   margin: 0;
                   padding: 0;
                 }
               }
+
+              .sub-nav-display {
+                display: block;
+              }
+
             }
           }
         }
@@ -130,3 +129,5 @@
     }
   }
 }
+
+
