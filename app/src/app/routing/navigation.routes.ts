@@ -23,6 +23,16 @@ export const NAVIGATION_ROUTES: NavigationRoutes[] = [
             title: 'Cheat sheet',
           }
         ]
+      },
+      {
+        path: '/docker',
+        title: 'Docker',
+        children: [
+          {
+            path: '/docker/cheat-sheet',
+            title: 'Cheat sheet',
+          }
+        ]
       }
     ]
   }

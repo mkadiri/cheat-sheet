@@ -12,6 +12,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { CodeBoxComponent } from '../code-box/code-box.component';
 import { ModalComponent } from '../modal/modal.component';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import {DockerComponent} from "../pages/docker/docker.component";
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
   ],
   declarations: [
     KubectlComponent,
+    DockerComponent,
     CodeBoxComponent,
     ModalComponent
   ],

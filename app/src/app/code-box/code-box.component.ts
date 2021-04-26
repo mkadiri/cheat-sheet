@@ -60,10 +60,12 @@ export class CodeBoxComponent implements OnInit {
       if (key.startsWith(this._environmentVariableRoot)) {
         let pieces = key.split(/[\s/]+/);
         let envName = '$' + pieces[pieces.length - 1];
+        let envName2 = '${' + pieces[pieces.length - 1] + '}';
         let value = window.localStorage.getItem(key);
 
         if (value) {
           out = out.replace(envName, window.localStorage.getItem(key));
+          out = out.replace(envName2, window.localStorage.getItem(key));
         }
       }
     }
