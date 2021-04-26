@@ -1,12 +1,52 @@
 <div class="row">
   <div class="col-md-12">
     <app-modal
-      [environmentVariables]="['context', 'namespace', 'pod']">
+      [environmentVariables]="['context', 'namespace', 'pod', 'deployment']">
     </app-modal>
 
     <div class="card">
       <div class="card-header">
-<!--        <h5 class="card-title">Kubectl commands</h5>-->
+        <h5 class="card-title">Pod</h5>
+      </div>
+      <div class="card-body">
+        <app-code-box
+          comment="exec on to pod on namespace"
+          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          comment="exec mysql command on pod"
+          code='kubectl --context=$context --namespace=$namespace exec -ti $pod mysql <<< "show tables;"'>
+        </app-code-box>
+
+        <app-code-box
+          comment="log container"
+          code='kubectl --context=${context} --namespace=${namespace} logs -f deployment/${deployment}'>
+        </app-code-box>
+
+        <app-code-box
+          comment="get pods"
+          code='kubectl --context=${context} --namespace=${namespace} get pods'>
+        </app-code-box>
+
+        <app-code-box
+          comment="describe pod"
+          code='kubectl --context=${context} --namespace=${namespace} describe pod ${pod}'>
+        </app-code-box>
+
+        <app-code-box
+          comment="ping readiness and healthcheck endpoint on pod, endpoint will vary depending on what you set it under livenessProbe and readinessProbe"
+          code='
+kubectl exec -ti --namespace=${namespace} ${pod} -- bash \
+  -c "curl localhost/healthcheck-liveness && curl localhost/healthcheck-readiness"'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Cluster</h5>
       </div>
       <div class="card-body">
         <app-code-box
@@ -20,18 +60,8 @@
         </app-code-box>
 
         <app-code-box
-          comment="exec on to pod on namespace"
-          code="kubectl --context=$context --namespace=$namespace exec -ti $pod bash">
-        </app-code-box>
-
-        <app-code-box
-          comment="exec mysql command on pod"
-          code='kubectl --context=$context --namespace=$namespace exec -ti $pod mysql <<< "show tables;"'>
-        </app-code-box>
-
-        <app-code-box
-          comment="exec mysql command on pod"
-          code='kubectl --context=$context --namespace=$namespace exec -ti $pod mysql <<< "echo &apos;hello world&apos;"'>
+          comment="get nodes on a cluster"
+          code='kubectl --context=${context} get nodes'>
         </app-code-box>
 
       </div>
