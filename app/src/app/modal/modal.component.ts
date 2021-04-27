@@ -16,12 +16,13 @@ export class ModalComponent implements OnInit {
   public form: FormGroup;
   public formModelProps = [];
   public submitted: boolean;
+  private _formModel: {};
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this._formModel = {}
+  }
 
   ngOnInit(): void {
-    const formModel = {};
-
     this._root = 'environment-variable' + this.router.url;
 
     this._environmentVariables.forEach((element) => {
@@ -30,10 +31,10 @@ export class ModalComponent implements OnInit {
         :'';
 
       this.formModelProps.push(element);
-      formModel[element] = new FormControl(value);
+      this._formModel[element] = new FormControl(value);
     });
 
-    this.form = new FormGroup(formModel);
+    this.form = new FormGroup(this._formModel);
   }
 
   @Input()
@@ -67,5 +68,23 @@ export class ModalComponent implements OnInit {
     Object.keys(this.form.controls).forEach(key => {
       window.localStorage.setItem(this._root + '/' + key, this.form.get(key).value);
     });
+
+    this.hide();
+  }
+
+  public clear() {
+    this._environmentVariables.forEach((element) => {
+      let value = window.localStorage.getItem(this._root + '/' + element);
+
+      if (value) {
+        window.localStorage.removeItem(this._root + '/' + element)
+      }
+
+      this._formModel[element] = new FormControl('');
+    });
+
+    this.form = new FormGroup(this._formModel);
+
+    this.hide();
   }
 }
