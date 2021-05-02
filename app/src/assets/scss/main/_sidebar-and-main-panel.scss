@@ -81,52 +81,85 @@ $sidebar-width: calc(100% - 260px) !default;
   //background-color: #030303;;
 
   .card {
+    font-size: 14px;
     background: #2c2c2c;
     color: #908e8e;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    border-color: #000000;
 
     .card-header{
       background: #1d1d1d;
+      height: 40px;
+      padding-top: 5px;
+      border-bottom: 1px solid black;
+
+      .card-title {
+        font-size: 16px;
+      }
     }
 
-    .code-wrapper{
-      width: 1000px;
-      background: #1c1b1b;
-      padding: 5px;
-      float: left;
-      margin-bottom: 10px;
-      margin-right: 300px;
+    .card-body{
+      a{
+        color: #4b8bb1;
+      }
 
-
-      p{
-        color: #686666;
-        padding: 0;
-        padding-bottom: 5px;
-        margin: 0;
+      .code-wrapper{
         font-size: 14px;
-      }
-
-      pre{
-        padding: 0;
-        margin: 0;
-      }
-
-      code{
-        color: #908e8e;
+        font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+        width: 100%;
         background: #1c1b1b;
-        padding: 0;
-        margin: 0;
-      }
+        padding: 5px;
+        float: left;
+        margin-bottom: 10px;
+        margin-right: 300px;
 
-      button{
-        padding: 0;
-        background: #242222;
-        width: 80px;
-        height: 30px;
-        color: #908e8e;
-        float: right;
-        border: 1px solid #3d3b3b;
-        vertical-align: top; /* here */
+        .code-wrapper-content{
+          //background: #FF9500;
+          padding-right: 90px;
+
+          p{
+            color: #686666;
+            float: left;
+            margin: 0;
+            padding: 0 0 5px;
+
+            span{
+              display: inline-block;
+              float: left;
+              width: 100%;
+            }
+
+            span:before {
+              content: '# ';
+            }
+          }
+
+          pre{
+            padding: 0;
+            margin: 0;
+            width: 100%;
+          }
+
+
+
+          code{
+            color: #908e8e;
+            background: #1c1b1b;
+            padding: 0;
+            margin: 0;
+          }
+        }
+
+        button{
+          padding: 0;
+          background: #242222;
+          width: 80px;
+          height: 30px;
+          color: #908e8e;
+          float: right;
+          border: 1px solid #3d3b3b;
+          vertical-align: top; /* here */
+        }
       }
     }
   }

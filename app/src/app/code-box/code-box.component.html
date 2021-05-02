@@ -2,6 +2,10 @@
   <button (click)="copyToClipboard()">
     <fa-icon [icon]="faCopy"></fa-icon>
   </button>
-  <p># {{comment}}</p>
-  <pre><code [highlight]="codeOutput"  [lineNumbers]="true" id="{{elemId}}">{{codeOutput}}</code></pre>
+  <div class="code-wrapper-content">
+    <p>
+      <span *ngFor="let comment of comments">{{comment}}</span>
+    </p>
+    <pre><code [highlight]="codeOutput"  [lineNumbers]="true" id="{{elemId}}">{{codeOutput}}</code></pre>
+  </div>
 </div>

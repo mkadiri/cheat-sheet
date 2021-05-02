@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CodeBoxComponent implements OnInit {
   private _comment: string;
+  private _comments: string[];
   private _code: string;
   private _environmentVariableRoot: string;
   private _elemId: string;
@@ -21,24 +22,33 @@ export class CodeBoxComponent implements OnInit {
     this._environmentVariableRoot = 'environment-variable' + this.router.url;
   }
 
+  get comments(): string[] {
+    return this._comments;
+  }
+
+  @Input()
+  set comments(value: string[]) {
+    this._comments = value;
+  }
+
   get environmentVariableRoot(): string {
     return this._environmentVariableRoot;
   }
 
-  @Input()
   get comment(): string {
     return this._comment;
   }
 
+  @Input()
   set comment(comment: string) {
     this._comment = comment;
   }
 
-  @Input()
   get code(): string {
     return this._code;
   }
 
+  @Input()
   set code(code: string) {
     this._code = code;
   }

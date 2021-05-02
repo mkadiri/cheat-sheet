@@ -15,12 +15,12 @@ export const NAVIGATION_ROUTES: NavigationRoutes[] = [
     category: "DevOps",
     nav: [
       {
-        path: '/kubectl',
-        title: 'Kubectl',
+        path: '/kubernetes',
+        title: 'Kubernetes',
         children: [
           {
-            path: '/kubectl/cheat-sheet',
-            title: 'Cheat sheet',
+            path: '/kubernetes/kubectl-cheat-sheet',
+            title: 'Kubectl cheat sheet',
           }
         ]
       },
@@ -40,6 +40,51 @@ export const NAVIGATION_ROUTES: NavigationRoutes[] = [
         children: [
           {
             path: '/aws-cdk/cheat-sheet',
+            title: 'Cheat sheet',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    category: "Programming",
+    nav: [
+      {
+        path: '/node',
+        title: 'Node',
+        children: [
+          {
+            path: '/node/npm',
+            title: 'NPM',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    category: "Databases",
+    nav: [
+      {
+        path: '/mysql',
+        title: 'Mysql',
+        children: [
+          {
+            path: '/mysql/cheat-sheet',
+            title: 'Cheat sheet',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    category: "Other",
+    nav: [
+      {
+        path: '/git',
+        title: 'Git',
+        children: [
+          {
+            path: '/git/cheat-sheet',
             title: 'Cheat sheet',
           }
         ]

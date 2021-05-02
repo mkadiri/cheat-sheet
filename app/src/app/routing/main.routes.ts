@@ -1,12 +1,15 @@
 import { Routes } from '@angular/router';
-import {KubectlComponent} from "../pages/kubectl/kubectl.component";
-import {DockerComponent} from "../pages/docker/docker.component";
-import {AwsCdkCheatSheetComponent} from "../pages/aws-cdk/cheat-sheet/aws-cdk-cheat-sheet.component";
+import {KubectlCheatSheetComponent} from "../pages/devops/kubernetes/kubectl-cheat-sheet.component";
+import {DockerComponent} from "../pages/devops/docker/docker.component";
+import {AwsCdkCheatSheetComponent} from "../pages/devops/aws-cdk/cheat-sheet/aws-cdk-cheat-sheet.component";
+import {NpmComponent} from "../pages/programming/node/npm/npm.component";
+import {MysqlCheatSheetComponent} from "../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component";
+import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-sheet.component";
 
 export const MAIN_ROUTES: Routes = [
   {
-    path: 'kubectl/cheat-sheet',
-    component: KubectlComponent
+    path: 'kubernetes/kubectl-cheat-sheet',
+    component: KubectlCheatSheetComponent
   },
   {
     path: 'docker/cheat-sheet',
@@ -15,5 +18,17 @@ export const MAIN_ROUTES: Routes = [
   {
     path: 'aws-cdk/cheat-sheet',
     component: AwsCdkCheatSheetComponent
+  },
+  {
+    path: 'node/npm',
+    component: NpmComponent
+  },
+  {
+    path: 'mysql/cheat-sheet',
+    component: MysqlCheatSheetComponent
+  },
+  {
+    path: 'git/cheat-sheet',
+    component: GitCheatSheetComponent
   }
 ];
