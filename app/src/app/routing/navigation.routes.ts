@@ -35,6 +35,16 @@ export const NAVIGATION_ROUTES: NavigationRoutes[] = [
         ]
       },
       {
+        path: '/aws-certification',
+        title: 'AWS Certification',
+        children: [
+          {
+            path: '/aws-certification/cloud-practitioner',
+            title: 'Cloud Practitioner',
+          }
+        ]
+      },
+      {
         path: '/aws-cdk',
         title: 'AWS CDK',
         children: [

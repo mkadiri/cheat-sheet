@@ -6,6 +6,7 @@ import {NpmComponent} from "../pages/programming/node/npm/npm.component";
 import {MysqlCheatSheetComponent} from "../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component";
 import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-sheet.component";
 import {NewrelicCheatSheetComponent} from "../pages/devops/newrelic/cheat-sheet/newrelic-cheat-sheet.component";
+import {AwsCertificationCloudPractitionerComponent} from "../pages/devops/aws-certification/cloud-practioner/aws-certification-cloud-practitioner.component";
 
 export const MAIN_ROUTES: Routes = [
   {
@@ -35,5 +36,9 @@ export const MAIN_ROUTES: Routes = [
   {
     path: 'newrelic/cheat-sheet',
     component: NewrelicCheatSheetComponent
+  },
+  {
+    path: 'aws-certification/cloud-practitioner',
+    component: AwsCertificationCloudPractitionerComponent
   }
 ];

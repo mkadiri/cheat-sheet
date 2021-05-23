@@ -18,6 +18,7 @@ import {NpmComponent} from "../pages/programming/node/npm/npm.component";
 import {MysqlCheatSheetComponent} from "../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component";
 import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-sheet.component";
 import {NewrelicCheatSheetComponent} from "../pages/devops/newrelic/cheat-sheet/newrelic-cheat-sheet.component";
+import {AwsCertificationCloudPractitionerComponent} from "../pages/devops/aws-certification/cloud-practioner/aws-certification-cloud-practitioner.component";
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import {NewrelicCheatSheetComponent} from "../pages/devops/newrelic/cheat-sheet/
     NpmComponent,
     MysqlCheatSheetComponent,
     GitCheatSheetComponent,
-    NewrelicCheatSheetComponent
+    NewrelicCheatSheetComponent,
+    AwsCertificationCloudPractitionerComponent
   ],
   providers: [
     {
