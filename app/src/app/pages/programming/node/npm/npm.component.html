@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-modal
+      [environmentVariables]="['package', 'version']">
+    </app-modal>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Basics</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          comment="install/add a package"
+          code="npm install ${package}">
+        </app-code-box>
+
+        <app-code-box
+          comment="install/add a package with an older version"
+          code="npm install ${package}@${version}">
+        </app-code-box>
+
+        <app-code-box
+          comment="uninstall/remove a package"
+          code="npm uninstall ${package}">
+        </app-code-box>
+
+        <app-code-box
+          comment="ignore all peerDependencies when installing, in the style of npm version 4 through version 6."
+          code="npm install ${package} --legacy-peer-deps">
+        </app-code-box>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -17,6 +17,7 @@ import {AwsCdkCheatSheetComponent} from "../pages/devops/aws-cdk/cheat-sheet/aws
 import {NpmComponent} from "../pages/programming/node/npm/npm.component";
 import {MysqlCheatSheetComponent} from "../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component";
 import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-sheet.component";
+import {NewrelicCheatSheetComponent} from "../pages/devops/newrelic/cheat-sheet/newrelic-cheat-sheet.component";
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-s
     ModalComponent,
     NpmComponent,
     MysqlCheatSheetComponent,
-    GitCheatSheetComponent
+    GitCheatSheetComponent,
+    NewrelicCheatSheetComponent
   ],
   providers: [
     {

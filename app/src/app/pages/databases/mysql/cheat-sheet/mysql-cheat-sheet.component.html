@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-modal
+      [environmentVariables]="['host', 'user', 'query', 'database', 'table']">
+    </app-modal>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Percona</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          comment='dry-run schema change. e.g. pt-online-schema-change --progress=time,30 --host 123.rds.amazonaws.com --user root --ask-pass --alter "MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT" D=main,t=user --dry-run'
+          code='
+pt-online-schema-change --progress=time,30 \
+  --host ${host} \
+  --user ${user} --ask-pass --alter \
+  "${query}" D=${database},t=${table} --dry-run'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">References</span>
+      </div>
+      <div class="card-body">
+        https://www.percona.com/doc/percona-toolkit/LATEST/pt-online-schema-change.html
+        https://quidco.atlassian.net/browse/SA-2766
+
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+

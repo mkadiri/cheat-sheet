@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-modal
+      [environmentVariables]="['user', 'container', 'file_path', 'output_path', 'database']">
+    </app-modal>
+
+    <div class="card">
+      <div class="card-header">
+<!--        <span class="card-title">Kubectl commands</span>-->
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['remove images']"
+          code="docker image prune">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['remove volume data']"
+          code="docker volume prune">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['execute container with different user ']"
+          code="docker exec -ti --user ${user} ${container} bash">
+        </app-code-box>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,235 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-modal
+      [environmentVariables]="['context', 'namespace', 'pod', 'deployment', 'statefulset', 'replicas', 'database', 'container']">
+    </app-modal>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Get</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['get pods']"
+          code='kubectl --context=${context} --namespace=${namespace} get pods'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get pods on all namespace']"
+          code='kubectl --context=${context} get pods --all-namespaces'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get deployments']"
+          code='kubectl --context=${context} --namespace=${namespace} get deployments'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get nodes']"
+          code='kubectl --context=${context} --namespace=${namespace} get nodes'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get persistent volumes']"
+          code='kubectl --context=${context} --namespace=${namespace} get pv'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get persistent volume claims']"
+          code='kubectl --context=${context} --namespace=${namespace} get pvc'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get horizontal pod autoscalers (requires hpa addons installed)']"
+          code='kubectl --context=${context} --namespace=${namespace} get hpa'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get vertical pod autoscalers']"
+          code='kubectl --context=${context} --namespace=${namespace} get vpa'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Exec</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['exec on to pod']"
+          code="kubectl --context=${context} --namespace=${namespace} exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['exec on to specific container']"
+          code="kubectl --context=${context} --namespace=${namespace} --container=${container} exec -ti $pod bash">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['exec mysql command on pod']"
+          code='kubectl --context=${context} --namespace=${namespace} exec -ti $pod mysql <<< "show tables;"'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="[
+            'ping readiness and healthcheck endpoint on pod',
+            'endpoint will vary depending on what you set it under livenessProbe and readinessProbe'
+          ]"
+          code='kubectl --context=${context} --namespace=${namespace} exec -ti ${pod} -- bash -c "curl localhost/healthcheck-liveness && curl localhost/healthcheck-readiness"'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['backup database on mysql container']"
+          code='kubectl --context=${context} --namespace=${namespace} exec -ti ${pod} -- bash -c "mysql -u root --password=root ${database} < ~/${database}.sql"'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Logs</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['log pod']"
+          code='kubectl --context=${context} --namespace=${namespace} logs -f ${pod}'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['log output from specific container on a pod']"
+          code='kubectl --context=${context} --namespace=${namespace} --container=${container} logs -f ${pod}'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['log deployment containers']"
+          code='kubectl --context=${context} --namespace=${namespace} logs -f deployment/${deployment}'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Describe</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['describe pod']"
+          code='kubectl --context=${context} --namespace=${namespace} describe pod ${pod}'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['describe vertical pod autoscalers']"
+          code='kubectl --context=${context} --namespace=${namespace} describe vpa'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['describe vpa pod']"
+          code='kubectl --context=${context} --namespace=${namespace} describe vpa ${pod}'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['describe horizontal pod autoscalers']"
+          code='kubectl --context=${context} --namespace=${namespace} describe hpa'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Scale</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['scale deployment replicas']"
+          code='kubectl --context=${context} --namespace=${namespace} scale --replicas=${replicas} deployment/${deployment}'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['scale statefulset replicas']"
+          code='kubectl --context=${context} --namespace=${namespace} scale --replicas=${replicas} statefulset/${statefulset}'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Delete</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['delete pods that have the `CrashLoopBackOff` status']"
+          code='kubectl --context=${context} --namespace=${namespace} `kubectl get pods | awk &apos;$3 == "CrashLoopBackOff" {print $1}&apos;`'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['delete statefulset']"
+          code='kubectl --context=${context} --namespace=${namespace} delete statefulset ${pod}'>
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['delete namespace']"
+          code='kubectl --context=${context} delete namespace ${namespace}'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Cluster</span>
+      </div>
+      <div class="card-body">
+        <app-code-box
+          [comments]="['display all contexts']"
+          code="kubectl config get-contexts">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['display current context']"
+          code="kubectl config current-context">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['get nodes on a cluster']"
+          code='kubectl --context=${context} get nodes'>
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Top (requires metrics server)</span>
+      </div>
+
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['view node cpu/memory']"
+          code="kubectl --context=${context} top nodes">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['view pod cpu/memory']"
+          code="kubectl --context=${context} top pods">
+        </app-code-box>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

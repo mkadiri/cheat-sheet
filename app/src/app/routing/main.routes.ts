@@ -5,6 +5,7 @@ import {AwsCdkCheatSheetComponent} from "../pages/devops/aws-cdk/cheat-sheet/aws
 import {NpmComponent} from "../pages/programming/node/npm/npm.component";
 import {MysqlCheatSheetComponent} from "../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component";
 import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-sheet.component";
+import {NewrelicCheatSheetComponent} from "../pages/devops/newrelic/cheat-sheet/newrelic-cheat-sheet.component";
 
 export const MAIN_ROUTES: Routes = [
   {
@@ -30,5 +31,9 @@ export const MAIN_ROUTES: Routes = [
   {
     path: 'git/cheat-sheet',
     component: GitCheatSheetComponent
+  },
+  {
+    path: 'newrelic/cheat-sheet',
+    component: NewrelicCheatSheetComponent
   }
 ];

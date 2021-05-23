@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-modal
+      [environmentVariables]="['context', 'namespace', 'pod', 'deployment', 'bucket']">
+    </app-modal>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Basics</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['create a new TypeScript CDK project']"
+          code="cdk init sample-app --language typescript">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['compare changes between local and deployed stack']"
+          code="cdk diff">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['deploy stack']"
+          code="cdk deploy">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['remove deployment and resources from aws']"
+          code="cdk destroy">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['synthesize deployment to view cloudformation template']"
+          code="cdk synth">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['create bootstrap stack includes resources that are used in the toolkit’s operation. For example, the stack includes an S3 bucket that is used to store templates and assets during the deployment process']"
+          code="cdk bootstrap">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['explicitly give the CDK full control over your account and switch over to the new bootstrapping resources enabled in the previous step']"
+          code="npx cdk bootstrap --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess">
+        </app-code-box>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Force delete cloudformation bootstrap and s3 bucket</span>
+      </div>
+      <div class="card-body">
+
+        <app-code-box
+          [comments]="['force delete cloudformation deployment']"
+          code="aws cloudformation delete-stack --stack-name CDKToolkit">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['copy names for command below']"
+          code="aws s3 ls | grep cdk">
+        </app-code-box>
+
+        <app-code-box
+          [comments]="['replace the name here from above s3 ls commands']"
+          code="aws s3 rb --force s3://${bucket}">
+        </app-code-box>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">References</span>
+      </div>
+      <div class="card-body">
+        <a href="https://github.com/aws/aws-cdk/issues/986" target="_blank">cdk bootstrap - no destroy option #986</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

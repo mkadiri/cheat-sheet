@@ -43,6 +43,16 @@ export const NAVIGATION_ROUTES: NavigationRoutes[] = [
             title: 'Cheat sheet',
           }
         ]
+      },
+      {
+        path: '/newrelic',
+        title: 'Newrelic',
+        children: [
+          {
+            path: '/newrelic/cheat-sheet',
+            title: 'Cheat sheet',
+          }
+        ]
       }
     ]
   },
