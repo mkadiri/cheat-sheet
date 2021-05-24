@@ -6,18 +6,20 @@ import { catchError, retry } from 'rxjs/operators';
 
 @Injectable()
 export class AwsCertificationCloudPractitionerService {
-  configUrl = 'assets/docs/aws.md';
+  readmeFileLocation: string;
 
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line:typedef
-  public getConfig() {
-    console.log('hello world');
+  public getConfig(readmeFileLocation: string) {
+    this.readmeFileLocation = readmeFileLocation;
 
-    return this.http.get(this.configUrl, { responseType: 'text'})
+    console.log(this.readmeFileLocation);
+
+    return this.http.get(this.readmeFileLocation, { responseType: 'text'})
       .pipe(
-        retry(3), // retry a failed request up to 3 times
-        catchError(this.handleError) // then handle the error
+        retry(3),
+        catchError(this.handleError)
       );
   }
 
