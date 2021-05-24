@@ -1,0 +1,13 @@
+#
+# ALL CHANGES TO THIS FILE MUST BE REVIEWED BY DEVOPS
+#
+
+.git
+.gitignore
+Makefile
+README.md
+
+**/node_modules
+**/dist
+**/bower_components
+.env

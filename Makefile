@@ -1,5 +1,5 @@
 BASE = github.com/mkadiri
-IMAGE = frontend-microservice
+IMAGE = cheat-sheet-web
 TAG = local
 
 build:

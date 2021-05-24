@@ -4,21 +4,25 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import {MAIN_ROUTES} from "../routing/main.routes";
+import {MAIN_ROUTES} from '../routing/main.routes';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {KubectlCheatSheetComponent} from "../pages/devops/kubernetes/kubectl-cheat-sheet.component";
+import {KubectlCheatSheetComponent} from '../pages/devops/kubernetes/kubectl-cheat-sheet.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CodeBoxComponent } from '../code-box/code-box.component';
 import { ModalComponent } from '../modal/modal.component';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
-import {DockerComponent} from "../pages/devops/docker/docker.component";
-import {AwsCdkCheatSheetComponent} from "../pages/devops/aws-cdk/cheat-sheet/aws-cdk-cheat-sheet.component";
-import {NpmComponent} from "../pages/programming/node/npm/npm.component";
-import {MysqlCheatSheetComponent} from "../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component";
-import {GitCheatSheetComponent} from "../pages/other/git/cheat-sheet/git-cheat-sheet.component";
-import {NewrelicCheatSheetComponent} from "../pages/devops/newrelic/cheat-sheet/newrelic-cheat-sheet.component";
-import {AwsCertificationCloudPractitionerComponent} from "../pages/devops/aws-certification/cloud-practioner/aws-certification-cloud-practitioner.component";
+import {DockerComponent} from '../pages/devops/docker/docker.component';
+import {AwsCdkCheatSheetComponent} from '../pages/devops/aws-cdk/cheat-sheet/aws-cdk-cheat-sheet.component';
+import {NpmComponent} from '../pages/programming/node/npm/npm.component';
+import {MysqlCheatSheetComponent} from '../pages/databases/mysql/cheat-sheet/mysql-cheat-sheet.component';
+import {GitCheatSheetComponent} from '../pages/other/git/cheat-sheet/git-cheat-sheet.component';
+import {NewrelicCheatSheetComponent} from '../pages/devops/newrelic/cheat-sheet/newrelic-cheat-sheet.component';
+import {AwsCertificationCloudPractitionerComponent} from '../pages/devops/aws-certification/cloud-practioner/aws-certification-cloud-practitioner.component';
+import { HttpClientModule  } from '@angular/common/http';
+import {OneComponent, TwoComponent, ThreeComponent} from '../pages/devops/aws-certification/cloud-practioner/other.component';
+import {BetterComponent} from '../pages/devops/aws-certification/cloud-practioner/better.component';
+import {DclWrapper} from '../pages/devops/aws-certification/cloud-practioner/dcl-wrapper.component';
 
 @NgModule({
   imports: [
@@ -29,7 +33,8 @@ import {AwsCertificationCloudPractitionerComponent} from "../pages/devops/aws-ce
     ClipboardModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    HighlightModule
+    HighlightModule,
+    HttpClientModule
   ],
   declarations: [
     KubectlCheatSheetComponent,
@@ -41,7 +46,17 @@ import {AwsCertificationCloudPractitionerComponent} from "../pages/devops/aws-ce
     MysqlCheatSheetComponent,
     GitCheatSheetComponent,
     NewrelicCheatSheetComponent,
-    AwsCertificationCloudPractitionerComponent
+    AwsCertificationCloudPractitionerComponent,
+    BetterComponent,
+    DclWrapper,
+    OneComponent,
+    TwoComponent,
+    ThreeComponent
+  ],
+  entryComponents: [
+    OneComponent,
+    TwoComponent,
+    ThreeComponent
   ],
   providers: [
     {

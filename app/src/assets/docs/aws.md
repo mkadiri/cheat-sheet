@@ -24,7 +24,7 @@
 
 
 ### Five characteristics of cloud computing
-- on-demand self service - *can provision resources without human interaction*
+- on-demand self-service - *can provision resources without human interaction*
 - broad network access - *resources available over network, accessed by diverse client platforms*
 - multi-tenancy and resource pooling - *multiple clients can share same infra*
 - rapid elasticity and scalibility
