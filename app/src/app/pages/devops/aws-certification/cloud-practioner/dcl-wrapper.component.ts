@@ -26,7 +26,7 @@ export class DclWrapper {
 
     let factory = this.componentFactoryResolver.resolveComponentFactory(this.type);
     this.cmpRef = this.target.createComponent(factory);
-    this.cmpRef.instance.title = 'asdasd';
+    // this.cmpRef.instance.title = 'asdasd';
     // to access the created instance use
     // this.compRef.instance.someProperty = 'someValue';
     // this.compRef.instance.someOutput.subscribe(val => doSomething());
