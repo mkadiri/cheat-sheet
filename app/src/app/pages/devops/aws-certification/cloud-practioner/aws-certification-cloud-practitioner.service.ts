@@ -14,8 +14,6 @@ export class AwsCertificationCloudPractitionerService {
   public getConfig(readmeFileLocation: string) {
     this.readmeFileLocation = readmeFileLocation;
 
-    console.log(this.readmeFileLocation);
-
     return this.http.get(this.readmeFileLocation, { responseType: 'text'})
       .pipe(
         retry(3),

@@ -1,12 +1,9 @@
 import {
-  ChangeDetectorRef,
-  Compiler,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
-  Input,
-  OnInit,
-  ViewChild,
+  Input, QueryList,
+  ViewChildren,
   ViewContainerRef
 } from '@angular/core';
 import {OneComponent} from './other.component';
@@ -14,18 +11,24 @@ import {AwsCertificationCloudPractitionerService} from './aws-certification-clou
 
 @Component({
   selector: 'app-better',
-  template: `<div #target></div>`
+  template: `
+    <div *ngFor="let box of boxes; let i = index" >
+      <ng-template #dynamic></ng-template>
+    </div>
+    `
 })
 export class BetterComponent{
-  @ViewChild('target', { read: ViewContainerRef }) target;
+  @ViewChildren('dynamic', {read: ViewContainerRef}) public widgetTargets: QueryList<ViewContainerRef>;
   @Input() readmeFileLocation: string;
-  components;
+  boxes = [OneComponent, OneComponent];
   error: any;
   readmeContent: any | undefined;
   cmpRef: ComponentRef<any>;
-  private isViewInitialized = false;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private awsCertificationCloudPractitionerService: AwsCertificationCloudPractitionerService, private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private awsCertificationCloudPractitionerService: AwsCertificationCloudPractitionerService
+  ) {}
 
   ngAfterViewInit() {
     this.awsCertificationCloudPractitionerService
@@ -37,10 +40,8 @@ export class BetterComponent{
   }
 
   onSuccess(data: any): void {
-    console.log('onSuccess');
-    this.isViewInitialized = true;
     this.readmeContent = data;
-    this.components = [OneComponent];
+    // this.boxes = [OneComponent, OneComponent];
     this.updateComponent();
   }
 
@@ -50,37 +51,19 @@ export class BetterComponent{
   }
 
   updateComponent(): void {
-    console.log('updateComponent');
+    for (let i = 0; i < this.widgetTargets.toArray().length; i++) {
+      const target = this.widgetTargets.toArray()[i];
+      const factory = this.componentFactoryResolver.resolveComponentFactory(this.boxes[i]);
+      const cmpRef = target.createComponent(factory);
 
-    if (!this.isViewInitialized || this.components === undefined) {
-      return;
+      if (cmpRef.instance.hasOwnProperty('title')) {
+        cmpRef.instance.title = 'abasdhsajhd';
+        cmpRef.instance.body = `
+          <app-code-box
+            comment='check status is clean, i.e. no output from command'
+            code='git status'>
+          </app-code-box>`;
+      }
     }
-
-    // this.components.forEach(component => {
-    if (this.cmpRef) {
-      this.cmpRef.destroy();
-    }
-
-    let component = OneComponent;
-    let factory = this.componentFactoryResolver.resolveComponentFactory(component);
-    this.cmpRef = this.target.createComponent(factory);
-    this.cmpRef.instance.title = 'uggdtdtdfguyg';
-    // to access the created instance use
-    // this.compRef.instance.someProperty = 'someValue';
-    // this.compRef.instance.someOutput.subscribe(val => doSomething());
-    this.cdRef.detectChanges();
-    // });
   }
-
-  // ngOnChanges() {
-  //   this.updateComponent();
-  // }
-  //
-  //
-  //
-  // ngOnDestroy() {
-  //   if (this.cmpRef) {
-  //     this.cmpRef.destroy();
-  //   }
-  // }
 }

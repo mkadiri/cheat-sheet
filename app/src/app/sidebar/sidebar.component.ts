@@ -14,8 +14,7 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    let base = this.router.url;
-    // console.log(this.router.url.base);
+    const base = this.router.url;
     this.navigationRoutes = NAVIGATION_ROUTES.filter(navItem => navItem);
 
     this.navigationRoutes.forEach((navigationRoute) => {
@@ -24,12 +23,8 @@ export class SidebarComponent implements OnInit {
           if (base == child.path) {
             this.activeNav = nav.path;
           }
-          console.log(child.path);
         })
       })
-      // console.log('elem: ' + elem);
     });
-
-    console.log('activeNav: ' + this.activeNav);
   }
 }

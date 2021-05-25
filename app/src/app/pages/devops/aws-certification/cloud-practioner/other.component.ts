@@ -7,8 +7,8 @@ import {Component} from '@angular/core';
     <div class="card-header">
       <span class="card-title">{{title}}</span>
     </div>
-    <div class="card-body">
-      {{body}}
+    <div [innerHTML]="body" class="card-body">
+
     </div>
   </div>`
 })
