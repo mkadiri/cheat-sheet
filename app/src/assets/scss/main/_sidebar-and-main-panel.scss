@@ -100,8 +100,23 @@ $sidebar-width: calc(100% - 260px) !default;
     }
 
     .card-body{
+      background-color: #212121;
+
       a{
         color: #4b8bb1;
+      }
+
+      h5 {
+        font-size: 17px;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #393838;
+      }
+
+      h6 {
+        font-size: 14px;
+        margin-top: 30px;
+        margin-bottom: 10px;
       }
 
       .code-wrapper{

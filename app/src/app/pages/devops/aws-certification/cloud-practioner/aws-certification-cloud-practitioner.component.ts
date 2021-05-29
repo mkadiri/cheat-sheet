@@ -4,7 +4,7 @@ import {AwsCertificationCloudPractitionerService} from './aws-certification-clou
 @Component({
   moduleId: module.id,
   providers: [ AwsCertificationCloudPractitionerService ],
-  templateUrl: 'aws-certification-cloud-practitioner.component.html',
+  templateUrl: 'aws-certification.html',
   encapsulation: ViewEncapsulation.None,
 })
 

@@ -3,6 +3,7 @@ services:
 
   cheat-sheet-web:
     image: github.com/mkadiri/cheat-sheet-web:local
+    build: .
     container_name: cheat-sheet-web
     volumes:
       - ./app:/app

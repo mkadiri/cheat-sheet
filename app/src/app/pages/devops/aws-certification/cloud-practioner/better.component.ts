@@ -6,7 +6,7 @@ import {
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {OneComponent} from './other.component';
+import {OneComponent, TwoComponent} from './other.component';
 import {AwsCertificationCloudPractitionerService} from './aws-certification-cloud-practitioner.service';
 
 @Component({
