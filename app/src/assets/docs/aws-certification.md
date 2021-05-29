@@ -77,10 +77,8 @@
     - data in is free
   
 ```shell
-# say hello
+# say 
 hell world
-
-# say hello
 ```
 
 ```shell

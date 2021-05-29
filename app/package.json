@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
-    "build:readme-html": "npx ts-node build-scripts/readme-to-assets-convert.ts"
+    "build:gen-html": "npx ts-node build-scripts/readme-to-assets-convert.ts"
   },
   "private": true,
   "dependencies": {

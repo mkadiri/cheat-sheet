@@ -1,31 +1,58 @@
 const fs = require('fs');
 
-function formatSection(file: string, sectionBreakCounter: number): string {
-  if (sectionBreakCounter === 1) {
-    return file.replace(/---/, '' +
-      '    <div class="card">');
+function formatLists(data: string): string {
+  const listPattern = /^[-][ ].*/gm;
+  const subListPattern = /^([ ]{2}|[ ]{4})[-][ ].*/gm;
+  let previousLine = 'none';
 
-  } else if (sectionBreakCounter % 2 !== 0) {
-    return file.replace(/---/, '' +
-      '      </div>\n' +
-      '    </div>\n' +
-      '    <div class="card">');
+  const split = data.split('\n');
 
-  } else {
-    return file.replace(/---/, '' +
-      '      </div>\n' +
-      '    </div>\n' +
-      '    <div class="card">');
-  }
+  split.forEach((line, index) => {
+    let newLine = '';
+
+    if (line.match(listPattern)) {
+      if (!previousLine.match(listPattern) && !previousLine.match(subListPattern)) {
+        newLine += '<ul>\n';
+      }
+
+      newLine += `  <li>${line.replace(/^-/, '')}</li>\n`;
+    }
+
+    if (line.match(/^\s*$/gm) && (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
+      newLine += '</ul>\n';
+    }
+
+    previousLine = line;
+
+    if (newLine !== '') {
+      split[index] = line.replace(line, newLine);
+    }
+  });
+
+  return split.join('\n');
 }
 
-function formatSectionTop(line: string): string {
-  return line.replace(/##/gi, '' +
-    '      <div class="card-header">\n' +
-    '        <span class="card-title">\n') + '\n' +
-    '        </span>\n' +
-    '      </div>\n' +
-    '      <div class="card-body">\n';
+function formatSection(data: string): string {
+  const pattern = /---/gi;
+  const split = data.match(pattern);
+
+  split.forEach((block, index) => {
+    let newContent = '';
+
+    if (index !== 0) {
+      newContent += `
+            </div>
+        </div>\n`;
+    }
+
+    if (split.length - 1 !== index ) {
+      newContent += `<div class="card">\n`;
+    }
+
+    data = data.replace(block, newContent);
+  });
+
+  return data;
 }
 
 function formatCodeBlock(file: string): string {
@@ -43,16 +70,50 @@ function formatCodeBlock(file: string): string {
   return file;
 }
 
-function formatH5(line: string): string {
-  return line.replace(/###/gi, '<h5>') + '</h5>';
+function formatMainHeading(data: string): string {
+  const pattern = /#{2} (.*)(\n)/gi;
+
+  data.match(pattern).forEach(heading => {
+    const newHeading = `
+    <div class="card-header">
+        <span class="card-title">
+            ${
+              heading
+                .replace(/#{2}/, '')
+                .replace('\n', '')
+            }
+        </span>
+    </div>
+    <div class="card-body">\n\n`;
+
+    data = data.replace(heading, newHeading);
+  });
+
+  return data;
 }
 
-function formatH6(line: string): string {
-  return line.replace(/####/gi, '<h6>') + '</h6>';
+function formatH6(data: string): string {
+  const pattern = /#{4} (.*)(\n)/gi;
+
+  data.match(pattern).forEach(heading => {
+    const newHeading = heading.replace(/#{4}/, '<h6>')
+      .replace('\n', '') + '</h6>\n';
+    data = data.replace(heading, newHeading);
+  });
+
+  return data;
 }
 
-function formatListItem(line: string): string {
-  return line + '<br>';
+function formatH5(data: string): string {
+  const pattern = /#{3} (.*)(\n)/gi;
+
+  data.match(pattern).forEach(heading => {
+    const newHeading = heading.replace(/#{3}/, '<h5>')
+      .replace('\n', '') + '</h5>\n';
+    data = data.replace(heading, newHeading);
+  });
+
+  return data;
 }
 
 function wrapContent(data: string): string {
@@ -66,37 +127,16 @@ function wrapContent(data: string): string {
 
 function dothis(): void {
   let file = fs.readFileSync('src/assets/docs/aws-certification.md', 'utf8');
-  let sectionBreakCounter = 0;
-  let previousReplace = '';
 
-  file.split('\n').forEach(line => {
-    if ((line.match(/^#{2} [a-zA-Z0-9_](.*)*$/))) {
-      file = file.replace(line, formatSectionTop(line));
-
-    } else if ((line.match(/^#{3} [a-zA-Z0-9_](.*)*$/))){
-      file = file.replace(line, formatH5(line));
-
-    } else if ((line.match(/^#{4} [a-zA-Z0-9_](.*)*$/))){
-      file = file.replace(line, formatH6(line));
-
-    } else if (line.match(/---/)) {
-      sectionBreakCounter++;
-      file = formatSection(file, sectionBreakCounter);
-
-    } else if (line.match(/^-/ )) {
-      file = file.replace(line, formatListItem(line));
-
-    } else if (line.match(/^[0-9_]./ )) {
-      file = file.replace(line, line + '<br>');
-
-    } else if (line.match(/^# [a-zA-Z0-9_](.*)*$/)) {
-      file = file.replace(line, '');
-
-    }
-  });
-
-  file = wrapContent(file);
+  // remove first line heading
+  file = file.replace(/#.*/, '');
   file = formatCodeBlock(file);
+  file = formatSection(file);
+  file = formatH6(file);
+  file = formatH5(file);
+  file = formatMainHeading(file);
+  file = formatLists(file);
+  file = wrapContent(file);
 
   fs.writeFileSync('src/app/pages/devops/aws-certification/cloud-practioner/aws-certification.html', file);
 }
