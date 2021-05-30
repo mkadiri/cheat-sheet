@@ -113,6 +113,10 @@ $sidebar-width: calc(100% - 260px) !default;
         border-bottom: 1px solid #393838;
       }
 
+      h5:first-child {
+        margin-top: 0;
+      }
+
       h6 {
         font-size: 14px;
         margin-top: 30px;

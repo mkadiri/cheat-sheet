@@ -32,6 +32,10 @@ function formatLists(data: string): string {
   return split.join('\n');
 }
 
+function formatUnorderedList(data: string): string {
+
+}
+
 function formatSection(data: string): string {
   const pattern = /---/gi;
   const split = data.match(pattern);
