@@ -71,26 +71,11 @@
 
 3 pricing fundamentals
 - compute - pay for compute time
-  - d
 - storage - pay for amount of data stored
 - data transfer out
   - only pay when data leaves the cloud
   - data in is free
   
-```shell
-# say 
-hell world
-```
-
-```shell
-class mo {
-  private goodMorning;
-  
-  function getMorning(): void {
-    echo 'how is the moro?';
-  }
-}
-```
 ---
 
 ## AWS cloud overview
@@ -99,9 +84,4 @@ class mo {
 
 - compliance with governance and legal requirements
 
-
-
-
 ---
-
-

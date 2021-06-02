@@ -98,9 +98,6 @@ function formatOrderedList(data: string): string {
     /^([ ]{2})[0-9][.][ ].*/gm,
     /^([ ]{2})[0-9][.][ ]/
   );
-
-  //   return formatLists(data, 'ol', /^[0-9][.][ ]/, /^[0-9][.][ ].*/gm, /^([ ]{2}|[ ]{4})[0-9][.][ ].*/gm);
-
 }
 
 function formatSection(data: string): string {
