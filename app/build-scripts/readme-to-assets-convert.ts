@@ -20,20 +20,11 @@ function formatLists(data: string, listType: string, prefixToReplace: RegExp, li
     if (line.match(listPattern) && !previousLine.match(listPattern) && !previousLine.match(subListPattern)) {
       newLine += `<${listType}>\n`;
     }
-    //
-    // if (line.match(subListPattern) && previousLine.match(listPattern)) {
-    //   newLine += `  <${listType}>\n`;
-    // }
 
     // add li if line matches list pattern
     if (line.match(listPattern)) {
       newLine += `  <li>${line.replace(prefixToReplace, '')}</li>`;
     }
-
-    // tag closing rules
-    // if (line.match(/^\s*$/gm) && (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
-    //   newLine += `</${listType}>\n`;
-    // }
 
     // close ul if line is empty and previous line is list/sub-list item
     if (
@@ -72,11 +63,6 @@ function formatSLists(data: string, listType: string, prefixToReplace: RegExp, s
     if (line.match(subListPattern)) {
       newLine += `    <li>${line.replace(prefixToReplace, '')}</li>`;
     }
-
-    // tag closing rules
-    // if (line.match(/^\s*$/gm) && (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
-    //   newLine += `</${listType}>\n`;
-    // }
 
     // close ul if line is empty and previous line is list/sub-list item
     if (
