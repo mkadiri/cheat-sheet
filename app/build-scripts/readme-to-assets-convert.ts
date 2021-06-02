@@ -27,7 +27,7 @@ function formatLists(data: string, listType: string, prefixToReplace: RegExp, li
 
     // add li if line matches list pattern
     if (line.match(listPattern)) {
-      newLine += `  <li>${line.replace(prefixToReplace, '')}</li>\n`;
+      newLine += `  <li>${line.replace(prefixToReplace, '')}</li>`;
     }
 
     // tag closing rules
@@ -54,6 +54,53 @@ function formatLists(data: string, listType: string, prefixToReplace: RegExp, li
 
 function formatUnorderedLists(data: string): string {
   return formatLists(data, 'ul', /^[-][ ]/, /^[-][ ].*/gm, /^([ ]{2}|[ ]{4})[-][ ].*/gm);
+}
+
+function formatSLists(data: string, listType: string, prefixToReplace: RegExp, subListPattern: RegExp, parentListPattern: RegExp): string {
+  let previousLine = 'none';
+  const split = data.split('\n');
+
+  split.forEach((line, index) => {
+    let newLine = '';
+
+    // start ul if line matches sublist item and previous line matches parent list item
+    if (line.match(subListPattern) && previousLine.match(parentListPattern)) {
+      newLine += `  <li><${listType}>\n`;
+    }
+
+    // add li if line matches sublist pattern
+    if (line.match(subListPattern)) {
+      newLine += `    <li>${line.replace(prefixToReplace, '')}</li>`;
+    }
+
+    // tag closing rules
+    // if (line.match(/^\s*$/gm) && (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
+    //   newLine += `</${listType}>\n`;
+    // }
+
+    // close ul if line is empty and previous line is list/sub-list item
+    if (
+      (line.match(/^\s*$|^<\/ul>/gm) || line.match(parentListPattern)) && previousLine.match(subListPattern)) {
+      newLine += `  </${listType}></li>\n`;
+
+      if (line.match(/^<\/ul>/gm)) {
+        newLine += `</ul>\n`;
+      }
+    }
+
+    if (newLine !== '') {
+      split[index] = line.replace(line, newLine);
+    }
+
+    previousLine = line;
+  });
+
+  return split.join('\n');
+}
+
+
+function formatUnorderedSubLists(data: string): string {
+  return formatSLists(data, 'ul', /^[ ]{2}[-][ ]/, /^[ ]{2}[-][ ].*/gm, /^[ ].*<li>/gm);
 }
 
 function formatOrderedLists(data: string): string {
@@ -164,7 +211,7 @@ function dothis(): void {
   file = formatH5(file);
   file = formatMainHeading(file);
   file = formatUnorderedLists(file);
-  // file = formatUnorderedSubLists(file);
+  file = formatUnorderedSubLists(file);
   file = formatOrderedLists(file);
   file = wrapContent(file);
 
