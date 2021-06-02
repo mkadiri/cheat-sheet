@@ -34,7 +34,7 @@
 
 ### Six advantages
 - trade capItal expense (CAPEX) for operational expense (OPEX)
-    - pay on-demand, reduced total cost of ownership (TCO) and operational expense (OPEX)
+  - pay on-demand, reduced total cost of ownership (TCO) and operational expense (OPEX)
 - benefit from massive economies of scale - prices are more efficient due to large scale
 - stop guessing capacity - scale based on actual usage
 - increased speed and agility - due to on-demand
@@ -71,10 +71,11 @@
 
 3 pricing fundamentals
 - compute - pay for compute time
+  - d
 - storage - pay for amount of data stored
 - data transfer out
-    - only pay when data leaves the cloud
-    - data in is free
+  - only pay when data leaves the cloud
+  - data in is free
   
 ```shell
 # say 

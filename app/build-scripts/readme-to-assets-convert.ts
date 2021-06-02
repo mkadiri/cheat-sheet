@@ -1,39 +1,63 @@
 const fs = require('fs');
 
-function formatLists(data: string): string {
-  const listPattern = /^[-][ ].*/gm;
-  const subListPattern = /^([ ]{2}|[ ]{4})[-][ ].*/gm;
+/**
+ * Format lists in markup
+ * if line after main list item is empty and not sub list, close it
+ * @param data body of text to be converted
+ * @param listType can be ul/ol
+ * @param prefixToReplace the prefix e.g. "- " or "1. " tat should be replaced
+ * @param listPattern main list pattern
+ * @param subListPattern child list pattern
+ */
+function formatLists(data: string, listType: string, prefixToReplace: RegExp, listPattern: RegExp, subListPattern: RegExp): string {
   let previousLine = 'none';
-
   const split = data.split('\n');
 
   split.forEach((line, index) => {
     let newLine = '';
 
+    // start ul if line matches list item and previous line doesn't
+    if (line.match(listPattern) && !previousLine.match(listPattern) && !previousLine.match(subListPattern)) {
+      newLine += `<${listType}>\n`;
+    }
+    //
+    // if (line.match(subListPattern) && previousLine.match(listPattern)) {
+    //   newLine += `  <${listType}>\n`;
+    // }
+
+    // add li if line matches list pattern
     if (line.match(listPattern)) {
-      if (!previousLine.match(listPattern) && !previousLine.match(subListPattern)) {
-        newLine += '<ul>\n';
-      }
-
-      newLine += `  <li>${line.replace(/^-/, '')}</li>\n`;
+      newLine += `  <li>${line.replace(prefixToReplace, '')}</li>\n`;
     }
 
-    if (line.match(/^\s*$/gm) && (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
-      newLine += '</ul>\n';
-    }
+    // tag closing rules
+    // if (line.match(/^\s*$/gm) && (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
+    //   newLine += `</${listType}>\n`;
+    // }
 
-    previousLine = line;
+    // close ul if line is empty and previous line is list/sub-list item
+    if (
+      line.match(/^\s*$/gm) &&
+      (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
+      newLine += `</${listType}>\n`;
+    }
 
     if (newLine !== '') {
       split[index] = line.replace(line, newLine);
     }
+
+    previousLine = line;
   });
 
   return split.join('\n');
 }
 
-function formatUnorderedList(data: string): string {
+function formatUnorderedLists(data: string): string {
+  return formatLists(data, 'ul', /^[-][ ]/, /^[-][ ].*/gm, /^([ ]{2}|[ ]{4})[-][ ].*/gm);
+}
 
+function formatOrderedLists(data: string): string {
+  return formatLists(data, 'ol', /^[0-9][.][ ]/, /^[0-9][.][ ].*/gm, /^([ ]{2}|[ ]{4})[0-9][.][ ].*/gm);
 }
 
 function formatSection(data: string): string {
@@ -139,7 +163,9 @@ function dothis(): void {
   file = formatH6(file);
   file = formatH5(file);
   file = formatMainHeading(file);
-  file = formatLists(file);
+  file = formatUnorderedLists(file);
+  // file = formatUnorderedSubLists(file);
+  file = formatOrderedLists(file);
   file = wrapContent(file);
 
   fs.writeFileSync('src/app/pages/devops/aws-certification/cloud-practioner/aws-certification.html', file);
