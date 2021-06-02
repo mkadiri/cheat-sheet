@@ -1,5 +1,66 @@
 const fs = require('fs');
 
+function formList(data: string): string {
+  const split = data.split('\n');
+  const listPattern = /^[-][ ].*/gm;
+  const listPatternPrefix = /^[-][ ]/;
+  const subListPattern = /^([ ]{2})[-][ ].*/gm;
+  const subListPatternPrefix = /^[ ]{2}[-][ ]/;
+  const emptyPattern = /^\s*$/gm;
+
+  let prev = 'none';
+
+  split.forEach((curr, index) => {
+    let out = '';
+
+    if (prev.match(listPattern) && !curr.match(subListPattern)) {
+      out += `  </li>\n`;
+    }
+
+    // sub-list
+    if (curr.match(subListPattern) && prev.match(listPattern)) {
+      out += `    <ul>\n`;
+    }
+
+    if ((curr.match(listPattern) || curr.match(emptyPattern)) && prev.match(subListPattern)) {
+      out += `    </ul>\n`;
+    }
+
+    if (prev.match(subListPattern) && (curr.match(emptyPattern) || curr.match(listPattern))) {
+      out += `  </li>\n`;
+    }
+
+    if (curr.match(subListPattern)) {
+      out += `      <li>\n`;
+      out += `        ${curr.replace(subListPatternPrefix, '')}\n`;
+      out += `      </li>`;
+    }
+
+    // list
+    if (curr.match(listPattern) && !prev.match(listPattern) && !prev.match(subListPattern)) {
+      out += `<ul>\n`;
+    }
+
+    if (curr.match(emptyPattern) && (prev.match(listPattern) || prev.match(subListPattern))) {
+      out += `</ul>\n`;
+    }
+
+    if (curr.match(listPattern)) {
+      out += `  <li>\n`;
+      out += `    ${curr.replace(listPatternPrefix, '')}`;
+    }
+
+
+    if (out !== '') {
+      split[index] = curr.replace(curr, out);
+    }
+
+    prev = curr;
+  });
+
+  return split.join('\n');
+}
+
 /**
  * Format lists in markup
  * if line after main list item is empty and not sub list, close it
@@ -9,29 +70,57 @@ const fs = require('fs');
  * @param listPattern main list pattern
  * @param subListPattern child list pattern
  */
-function formatLists(data: string, listType: string, prefixToReplace: RegExp, listPattern: RegExp, subListPattern: RegExp): string {
+function formatLists(data: string): string {
   let previousLine = 'none';
   const split = data.split('\n');
+  const listPattern = /^[-][ ].*/gm;
+  const listPatternPrefix = /^[-][ ]/;
+  const subListPattern = /^([ ]{2})[-][ ].*/gm;
+  const subListPatternPrefix = /^[ ]{2}[-][ ]/;
 
   split.forEach((line, index) => {
     let newLine = '';
 
+    // close sublist
+    if (
+      (line.match(/^\s*$/) || line.match(listPattern)) && previousLine.match(subListPattern)) {
+      console.log(line);
+      newLine += `    </ul>\n`;
+    }
+
+
+
     // start ul if line matches list item and previous line doesn't
     if (line.match(listPattern) && !previousLine.match(listPattern) && !previousLine.match(subListPattern)) {
-      newLine += `<${listType}>\n`;
+      newLine += `<ul>\n`;
+
+    } else if (line.match(subListPattern) && previousLine.match(listPattern)) {
+      newLine += `    <ul>\n`;
     }
 
     // add li if line matches list pattern
     if (line.match(listPattern)) {
-      newLine += `  <li>${line.replace(prefixToReplace, '')}</li>`;
+      newLine += `  <li>${line.replace(listPatternPrefix, '')}\n`;
+    }
+
+    // add li if line matches sublist pattern
+    else if (line.match(subListPattern)) {
+      newLine += `      <li>${line.replace(subListPatternPrefix, '')}</li>\n`;
     }
 
     // close ul if line is empty and previous line is list/sub-list item
     if (
       line.match(/^\s*$/gm) &&
       (previousLine.match(listPattern) || previousLine.match(subListPattern))) {
-      newLine += `</${listType}>\n`;
+      newLine += `</ul>\n`;
     }
+
+    // add li if line matches list pattern
+    if (previousLine.match(listPattern)) {
+      newLine += `  </li>\n`;
+    }
+
+
 
     if (newLine !== '') {
       split[index] = line.replace(line, newLine);
@@ -44,7 +133,7 @@ function formatLists(data: string, listType: string, prefixToReplace: RegExp, li
 }
 
 function formatUnorderedLists(data: string): string {
-  return formatLists(data, 'ul', /^[-][ ]/, /^[-][ ].*/gm, /^([ ]{2}|[ ]{4})[-][ ].*/gm);
+  return formatLists(data);
 }
 
 function formatSLists(data: string, listType: string, prefixToReplace: RegExp, subListPattern: RegExp, parentListPattern: RegExp): string {
@@ -89,9 +178,9 @@ function formatUnorderedSubLists(data: string): string {
   return formatSLists(data, 'ul', /^[ ]{2}[-][ ]/, /^[ ]{2}[-][ ].*/gm, /^[ ].*<li>/gm);
 }
 
-function formatOrderedLists(data: string): string {
-  return formatLists(data, 'ol', /^[0-9][.][ ]/, /^[0-9][.][ ].*/gm, /^([ ]{2}|[ ]{4})[0-9][.][ ].*/gm);
-}
+// function formatOrderedLists(data: string): string {
+//   return formatLists(data, 'ol', /^[0-9][.][ ]/, /^[0-9][.][ ].*/gm, /^([ ]{2}|[ ]{4})[0-9][.][ ].*/gm);
+// }
 
 function formatSection(data: string): string {
   const pattern = /---/gi;
@@ -196,9 +285,10 @@ function dothis(): void {
   file = formatH6(file);
   file = formatH5(file);
   file = formatMainHeading(file);
-  file = formatUnorderedLists(file);
-  file = formatUnorderedSubLists(file);
-  file = formatOrderedLists(file);
+  // file = formatUnorderedLists(file);
+  // file = formatUnorderedSubLists(file);
+  file = formList(file);
+  // file = formatOrderedLists(file);
   file = wrapContent(file);
 
   fs.writeFileSync('src/app/pages/devops/aws-certification/cloud-practioner/aws-certification.html', file);

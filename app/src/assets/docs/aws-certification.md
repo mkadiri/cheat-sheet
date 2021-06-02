@@ -76,7 +76,7 @@
 - data transfer out
   - only pay when data leaves the cloud
   - data in is free
-
+  
 ```shell
 # say 
 hell world
