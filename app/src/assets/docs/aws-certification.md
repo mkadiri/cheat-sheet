@@ -29,7 +29,7 @@
 - on-demand self-service - *can provision resources without human interaction*
 - broad network access - *resources available over network, accessed by diverse client platforms*
 - multi-tenancy and resource pooling - *multiple clients can share same infra*
-- rapid elasticity and scalibility
+- rapid elasticity and scalability
 - measured service - users pay correctly for what they use
 
 ### Six advantages
@@ -76,6 +76,20 @@
   - only pay when data leaves the cloud
   - data in is free
   
+```shell
+# say 
+hell world
+```
+
+```shell
+class mo {
+  private goodMorning;
+  
+  function getMorning(): void {
+    echo 'how is the moro?';
+  }
+}
+```
 ---
 
 ## AWS cloud overview
@@ -84,4 +98,9 @@
 
 - compliance with governance and legal requirements
 
+
+
+
 ---
+
+

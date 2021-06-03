@@ -104,6 +104,10 @@ function formatSection(data: string): string {
   const pattern = /---/gi;
   const split = data.match(pattern);
 
+  if (split == null) {
+    return data;
+  }
+
   split.forEach((block, index) => {
     let newContent = '';
 
@@ -124,8 +128,14 @@ function formatSection(data: string): string {
 }
 
 function formatCodeBlock(file: string): string {
-  file.match(/```([^`]*)```/gi).forEach(block => {
-    let newBlock = block.replace(/```/gi, '');
+  const split = file.match(/[/`]{3}([^`]*)[/`]{3}/gi);
+
+  if (split == null) {
+    return file;
+  }
+
+  split.forEach(block => {
+    let newBlock = block.replace(/[/`]{3}/gi, '');
     newBlock = newBlock.replace(/<br>/gi, '');
 
     file = file.replace(`${block}`, `
@@ -140,8 +150,13 @@ function formatCodeBlock(file: string): string {
 
 function formatMainHeading(data: string): string {
   const pattern = /#{2} (.*)(\n)/gi;
+  const split = data.match(pattern);
 
-  data.match(pattern).forEach(heading => {
+  if (split == null) {
+    return data;
+  }
+
+  split.forEach(heading => {
     const newHeading = `
     <div class="card-header">
         <span class="card-title">
@@ -162,8 +177,13 @@ function formatMainHeading(data: string): string {
 
 function formatH6(data: string): string {
   const pattern = /#{4} (.*)(\n)/gi;
+  const split = data.match(pattern);
 
-  data.match(pattern).forEach(heading => {
+  if (split == null) {
+    return data;
+  }
+
+  split.forEach(heading => {
     const newHeading = heading.replace(/#{4}/, '<h6>')
       .replace('\n', '') + '</h6>\n';
     data = data.replace(heading, newHeading);
@@ -174,8 +194,13 @@ function formatH6(data: string): string {
 
 function formatH5(data: string): string {
   const pattern = /#{3} (.*)(\n)/gi;
+  const split = data.match(pattern);
 
-  data.match(pattern).forEach(heading => {
+  if (split == null) {
+    return data;
+  }
+
+  split.forEach(heading => {
     const newHeading = heading.replace(/#{3}/, '<h5>')
       .replace('\n', '') + '</h5>\n';
     data = data.replace(heading, newHeading);
