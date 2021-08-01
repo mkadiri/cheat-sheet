@@ -16,7 +16,7 @@ export class ModalComponent implements OnInit {
   public form: FormGroup;
   public formModelProps = [];
   public submitted: boolean;
-  private _formModel: {};
+  private readonly _formModel: {};
 
   constructor(private router: Router) {
     this._formModel = {}
@@ -26,9 +26,9 @@ export class ModalComponent implements OnInit {
     this._root = 'environment-variable' + this.router.url;
 
     this._environmentVariables.forEach((element) => {
-      let value = window.localStorage.getItem(this._root + '/' + element)
+      const value = window.localStorage.getItem(this._root + '/' + element)
         ? window.localStorage.getItem(this._root + '/' + element)
-        :'';
+        : '';
 
       this.formModelProps.push(element);
       this._formModel[element] = new FormControl(value);
@@ -46,23 +46,23 @@ export class ModalComponent implements OnInit {
     return this._environmentVariables;
   }
 
-  public show(): void {
+  show(): void {
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
   }
 
-  public hide(): void {
+  hide(): void {
     this.visibleAnimate = false;
     setTimeout(() => this.visible = false, 300);
   }
 
-  public onContainerClicked(event: MouseEvent): void {
+  onContainerClicked(event: MouseEvent): void {
     if ((<HTMLElement>event.target).classList.contains('modal')) {
       this.hide();
     }
   }
 
-  public submit() {
+  submit(): void {
     this.submitted = true;
 
     Object.keys(this.form.controls).forEach(key => {
@@ -72,9 +72,9 @@ export class ModalComponent implements OnInit {
     this.hide();
   }
 
-  public clear() {
+  clear(): void {
     this._environmentVariables.forEach((element) => {
-      let value = window.localStorage.getItem(this._root + '/' + element);
+      const value = window.localStorage.getItem(this._root + '/' + element);
 
       if (value) {
         window.localStorage.removeItem(this._root + '/' + element)
